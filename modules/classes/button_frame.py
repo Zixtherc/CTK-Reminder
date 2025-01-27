@@ -5,7 +5,7 @@ from os.path import join, abspath
 class Button(ctk.CTkButton):
     def __init__(self, ch_master: object, icon_name: str,  text: str, ch_fg_color: str,
                 ch_hover_color: str = '#373535', size: float = 20,
-                ch_corner_radius: int = 10,
+                ch_corner_radius: int = 10, ch_command : object = None,
                 **kwargs):
         self.ICON_NAME = icon_name
         self.SIZE = (int(size), int(size))
@@ -20,6 +20,8 @@ class Button(ctk.CTkButton):
             height = int(size),
             fg_color = ch_fg_color,
             hover_color = ch_hover_color,
+            corner_radius = ch_corner_radius,
+            command = ch_command,
             **kwargs)
         
     def load_image(self):
