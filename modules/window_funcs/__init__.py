@@ -1,1 +1,1 @@
-from .open_window import swith_frame
+from .switch_frames import swith_frame

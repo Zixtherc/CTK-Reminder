@@ -3,7 +3,7 @@ from ..jsn_func import read_json
 from .frame import Frame
 from .entry_frame import Entry_Text
 from .button_frame import Button
-from ..window_funcs.open_window import swith_frame
+from ..window_funcs.switch_frames import swith_frame
 class App(ctk.CTk):
     '''
     Основной `экран` нашего приложение, на `нём` мы будем `размещать` наши `Frame`  
@@ -23,6 +23,7 @@ class App(ctk.CTk):
         
         # Список всех наших Frame
         self.frames = {}
+        self.entry = {}
 
         # Основной Frame, на который мы будем всё крепить 
         self.frames["HEADER"] = Frame(
@@ -41,12 +42,34 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#00008b"
         )
+        self.entry["REGISTER"] = Entry_Text(
+            ch_master = self.frames["HEADER"],
+            ch_width = self.frames["HEADER"]._current_width * 0.5,
+            ch_height = self.frames["HEADER"]._current_height * 0.03,
+            ch_fg_color = "#ffffff",
+            ch_corner_radius = 15,
+            ch_border_width = 0.1,
+            font_size = 13,
+            ch_placeholder_text = "Enter your name")
+        self.entry["REGISTER"].place(x = 150, y = 300)
+
+        self.entry["LOGIN"] = Entry_Text(
+            ch_master = self.frames["HEADER"],
+            ch_width = self.frames["HEADER"]._current_width * 0.5,
+            ch_height = self.frames["HEADER"]._current_height * 0.03,
+            ch_fg_color = "#ffffff",
+            ch_corner_radius = 15,
+            ch_border_width = 0.1,
+            font_size = 13,
+            ch_placeholder_text = "Enter your login"
+        )
+        self.entry["LOGIN"].place(x = 150, y = 200)
         
         # Создаём поле ввода ( пока не использую )
         self.SEARCH = Entry_Text(
-                ch_master = self.frames["HEADER"],
-                ch_width = self.frames["HEADER"]._current_width * 0.2,
-                ch_height = self.frames["HEADER"]._current_height * 0.05,
+                ch_master = self.frames["SECOND_HEADER"],
+                ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
+                ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
                 ch_fg_color = "#ffffff",
                 ch_corner_radius = 15,
                 ch_border_width = 0.1,

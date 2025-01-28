@@ -1,5 +1,7 @@
 import customtkinter as ctk
 
+test = [" "]
+
 class Entry_Text(ctk.CTkEntry):
     '''
     Класс который позволит нам создавать поле ввода текста
@@ -20,18 +22,17 @@ class Entry_Text(ctk.CTkEntry):
             placeholder_text_color = ch_placeholder_text_color,
             text_color = ch_text_color,
             **kwargs)
+        
         self.base_width = ch_width
         self.bind("<KeyRelease>", self.adjust_text) 
         self.button_pressed_flag = False
-        self.bind("<Return>", self.enter_pressed)
         self.new_width = 0
-    def enter_pressed(self, event = None) -> str:
-        print(self.get())
-        text = self.get()
-        return text
+
     def adjust_text(self, event = None) ->  None:
         ''' Изменяет `ширину` `ввода` текста, если `пользователь` `начал` вводить текст'''
         text_length = len(self.get())
+        text = self.get()
         self.new_width = max(self.base_width, text_length * 7.5)
         self.configure(width = self.new_width)
-        print('1')
+        test[0] = text
+        print(text)
