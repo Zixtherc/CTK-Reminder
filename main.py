@@ -1,4 +1,7 @@
 import modules
 
 if __name__ == "__main__":
-    modules.app.mainloop()
+    try:
+        modules.app.mainloop()
+    except KeyboardInterrupt:
+        print("")

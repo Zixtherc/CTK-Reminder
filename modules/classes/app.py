@@ -44,8 +44,8 @@ class App(ctk.CTk):
         )
         self.entry["REGISTER"] = Entry_Text(
             ch_master = self.frames["HEADER"],
-            ch_width = self.frames["HEADER"]._current_width * 0.5,
-            ch_height = self.frames["HEADER"]._current_height * 0.03,
+            ch_width = self.frames["HEADER"]._current_width * 0.2,
+            ch_height = self.frames["HEADER"]._current_height * 0.05,
             ch_fg_color = "#ffffff",
             ch_corner_radius = 15,
             ch_border_width = 0.1,
@@ -55,8 +55,8 @@ class App(ctk.CTk):
 
         self.entry["LOGIN"] = Entry_Text(
             ch_master = self.frames["HEADER"],
-            ch_width = self.frames["HEADER"]._current_width * 0.5,
-            ch_height = self.frames["HEADER"]._current_height * 0.03,
+            ch_width = self.frames["HEADER"]._current_width * 0.2,
+            ch_height = self.frames["HEADER"]._current_height * 0.05,
             ch_fg_color = "#ffffff",
             ch_corner_radius = 15,
             ch_border_width = 0.1,

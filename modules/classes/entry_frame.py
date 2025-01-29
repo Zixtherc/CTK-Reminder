@@ -1,6 +1,6 @@
 import customtkinter as ctk
-
-test = [" "]
+import time
+input_text = [" "]
 
 class Entry_Text(ctk.CTkEntry):
     '''
@@ -24,15 +24,16 @@ class Entry_Text(ctk.CTkEntry):
             **kwargs)
         
         self.base_width = ch_width
-        self.bind("<KeyRelease>", self.adjust_text) 
+        self.bind("<Return>", self.adjust_text) 
         self.button_pressed_flag = False
         self.new_width = 0
 
     def adjust_text(self, event = None) ->  None:
         ''' Изменяет `ширину` `ввода` текста, если `пользователь` `начал` вводить текст'''
+        time.sleep(0.1)
         text_length = len(self.get())
         text = self.get()
         self.new_width = max(self.base_width, text_length * 7.5)
         self.configure(width = self.new_width)
-        test[0] = text
-        print(text)
+        input_text[0] = text
+        print(input_text[0])

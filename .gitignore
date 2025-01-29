@@ -1,4 +1,4 @@
 venv/
 pychache/
 static/
-g
+database.db
