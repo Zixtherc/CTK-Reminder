@@ -1,6 +1,6 @@
 import customtkinter as ctk
 import time
-input_text = [" "]
+from ..data_base.requests_bd import db
 
 class Entry_Text(ctk.CTkEntry):
     '''
@@ -35,5 +35,10 @@ class Entry_Text(ctk.CTkEntry):
         text = self.get()
         self.new_width = max(self.base_width, text_length * 7.5)
         self.configure(width = self.new_width)
-        input_text[0] = text
-        print(input_text[0])
+        return text 
+    
+    def add_user_db(self, name: str, password: str, email: str, event = None) -> None:
+        try:
+            db.insert_user(name = name, password = password, email = email)
+        except Exception as e:
+            print(f'Ошибка при добавлении пользователя в Базу Данных: {e}')
