@@ -13,4 +13,5 @@ class Frame(ctk.CTkFrame):
             fg_color = ch_fg_color,
             corner_radius = 0,
             **kwargs)
+        self.pack_propagate(False)
         self.grid_propagate(False)

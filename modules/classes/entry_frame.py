@@ -24,7 +24,7 @@ class Entry_Text(ctk.CTkEntry):
             **kwargs)
         
         self.base_width = ch_width
-        self.bind("<Return>", self.adjust_text) 
+        # self.bind("<Return>",  self.add_user_db)
         self.button_pressed_flag = False
         self.new_width = 0
 
@@ -37,8 +37,11 @@ class Entry_Text(ctk.CTkEntry):
         self.configure(width = self.new_width)
         return text 
     
-    def add_user_db(self, name: str, password: str, email: str, event = None) -> None:
-        try:
-            db.insert_user(name = name, password = password, email = email)
-        except Exception as e:
-            print(f'Ошибка при добавлении пользователя в Базу Данных: {e}')
+    # def add_user_db(self, name: str, password: str = "123", email: str = "12223", event=None) -> None:
+        # name = self.get()
+        # password = self.master.PASSWORD.get()        
+        # email = self.master.EMAIL.get()
+        # # db.insert_user(name=name, password=password, email=email)
+        # print(f'Пользователь с никнеймом: {name}, добавлен')
+        # print(f'Пользователь с паролем: {password}, добавлен')
+        # print(f'Пользователь с email: {email}, добавлен')

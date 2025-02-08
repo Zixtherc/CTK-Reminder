@@ -4,6 +4,8 @@ from .frame import Frame
 from .entry_frame import Entry_Text
 from .button_frame import Button
 from ..window_funcs.switch_frames import swith_frame
+from ..data_base.requests_bd import db
+
 class App(ctk.CTk):
     '''
     Основной `экран` нашего приложение, на `нём` мы будем `размещать` наши `Frame`  
@@ -42,7 +44,7 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#00008b"
         )
-        self.entry["REGISTER"] = Entry_Text(
+        self.entry["NAME"] = Entry_Text(
             ch_master = self.frames["HEADER"],
             ch_width = self.frames["HEADER"]._current_width * 0.2,
             ch_height = self.frames["HEADER"]._current_height * 0.05,
@@ -51,9 +53,9 @@ class App(ctk.CTk):
             ch_border_width = 0.1,
             font_size = 13,
             ch_placeholder_text = "Enter your name")
-        self.entry["REGISTER"].place(x = 150, y = 300)
+        self.entry["NAME"].pack(pady = 20)
 
-        self.entry["LOGIN"] = Entry_Text(
+        self.entry["PASSWORD"] = Entry_Text(
             ch_master = self.frames["HEADER"],
             ch_width = self.frames["HEADER"]._current_width * 0.2,
             ch_height = self.frames["HEADER"]._current_height * 0.05,
@@ -61,10 +63,22 @@ class App(ctk.CTk):
             ch_corner_radius = 15,
             ch_border_width = 0.1,
             font_size = 13,
-            ch_placeholder_text = "Enter your login"
+            ch_placeholder_text = "Enter your password",
         )
-        self.entry["LOGIN"].place(x = 150, y = 200)
+        self.entry["PASSWORD"].pack(pady = 20)
         
+        self.entry["EMAIL"] = Entry_Text(
+            ch_master = self.frames["HEADER"],
+            ch_width = self.frames["HEADER"]._current_width * 0.2,
+            ch_height = self.frames["HEADER"]._current_height * 0.05,
+            ch_fg_color = "#ffffff",
+            ch_corner_radius = 15,
+            ch_border_width = 0.1,
+            font_size = 13,
+            ch_placeholder_text = "Enter your email",
+        )
+        self.entry["EMAIL"].pack(pady = 20)
+
         # Создаём поле ввода ( пока не использую )
         self.SEARCH = Entry_Text(
                 ch_master = self.frames["SECOND_HEADER"],
@@ -86,7 +100,11 @@ class App(ctk.CTk):
             text = "Register",
             ch_fg_color = "#1f1f1f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: swith_frame(root = self, frame_name = "SECOND_HEADER")
+            ch_command = lambda: db.insert_user(
+                name = self.entry["NAME"].get(),
+                password = self.entry["PASSWORD"].get(),
+                email = self.entry["EMAIL"].get()
+            )
         )
         self.CONFIRM_BUTTON.place(x = 100, y = 100)
 

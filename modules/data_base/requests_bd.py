@@ -28,4 +28,4 @@ class DataBase:
         self.connect.close()
 
 db = DataBase(path_db = "modules/data_base/database.db")
-create_table = db.crate_table()
+# db.crate_table()
