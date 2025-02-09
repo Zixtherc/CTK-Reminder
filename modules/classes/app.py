@@ -20,7 +20,7 @@ class App(ctk.CTk):
 
         self.geometry(f"{self.WIDTH}x{self.HEIGHT}")
 
-        self.title("Hello World!")
+        self.title("Your Reminder!")
         self.resizable(False, False)
         
         # Список всех наших Frame
@@ -80,7 +80,7 @@ class App(ctk.CTk):
         self.entry["EMAIL"].pack(pady = 20)
 
         # Создаём поле ввода ( пока не использую )
-        self.SEARCH = Entry_Text(
+        self.entry["LOGIN_NAME"] = Entry_Text(
                 ch_master = self.frames["SECOND_HEADER"],
                 ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
                 ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
@@ -88,10 +88,35 @@ class App(ctk.CTk):
                 ch_corner_radius = 15,
                 ch_border_width = 0.1,
                 font_size = 13,
-                ch_placeholder_text = "Hello",
+                ch_placeholder_text = "Enter your name",
         )
         # Размещаем по указанным координатам
-        self.SEARCH.place(x = 300, y = 150)
+        self.entry["LOGIN_NAME"].place(x = 300, y = 150)
+        
+        self.entry["LOGIN_PASSWORD"] = Entry_Text(
+            ch_master = self.frames["SECOND_HEADER"],
+            ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
+            ch_fg_color = "#ffffff",
+            ch_corner_radius = 15,
+            ch_border_width = 0.1,
+            font_size = 13,
+            ch_placeholder_text = "Enter your password",
+        )
+        self.entry["LOGIN_PASSWORD"].place(x = 300, y = 50)
+
+        self.CONFIRM_BUTTON_LOGIN = Button(
+            ch_master = self.frames["SECOND_HEADER"],
+            icon_name = "m_glass.png",
+            text = "Login",
+            ch_fg_color = "#1f1f1f",
+            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
+            ch_command = lambda: db.find_user(
+                name = self.entry["LOGIN_NAME"].get(),
+                password = self.entry["LOGIN_PASSWORD"].get()
+            )
+        )
+        self.CONFIRM_BUTTON_LOGIN.pack()
 
         # Создаём кнопку, которая будет переключать на второй Frame
         self.CONFIRM_BUTTON = Button(
@@ -108,4 +133,13 @@ class App(ctk.CTk):
         )
         self.CONFIRM_BUTTON.place(x = 100, y = 100)
 
+        self.LOGIN_BUTTON = Button(
+            ch_master = self.frames["HEADER"],
+            icon_name = "m_glass.png",
+            text = "Login",
+            ch_fg_color = "#1f1f1f",
+            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
+            ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
+        )
+        self.LOGIN_BUTTON.place(x = 100, y = 150)
 app = App()

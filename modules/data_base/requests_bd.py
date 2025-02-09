@@ -19,9 +19,10 @@ class DataBase:
         self.cursor.execute(request, (name, password, email))
         self.connect.commit()
     
-    def find_user(self, id : int, name : str, password : str):
-        request = '''SELECT * FROM users WHERE id = ? AND name = ? AND password = ?'''
-        self.cursor.execute(request,(id, name, password))
+    def find_user(self,  name : str, password : str):
+        request = '''SELECT * FROM users WHERE name = ? AND password = ?'''
+        self.cursor.execute(request,(name, password))
+        print('ЮЗЕР НАЙДЕН УРАААА')
         return self.cursor.fetchone()
     
     def close_table(self):

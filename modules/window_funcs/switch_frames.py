@@ -1,10 +1,11 @@
-def swith_frame(root: object, frame_name: str, frame_color: str = '#e75480'):
+def swith_frame(root: object, frame_name: str, frame_color: str = '#00008b'):
     """
     Функция для переключения на другой фрейм.
     """
     # Перебираем все Frame которые мы получили 
     for frame in root.frames.values():
         # Скрываем каждый 
+        frame.pack_forget()
         frame.place_forget()
 
     # Если указанный фрейм существует в словаре
