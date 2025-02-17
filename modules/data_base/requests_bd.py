@@ -19,11 +19,12 @@ class DataBase:
         request = '''INSERT INTO users (name, password, email) VALUES (?, ?, ?)'''
         self.cursor.execute(request, (name, password, email))
         self.connect.commit()
+        return True
     
     def find_user(self,  name : str, password : str):
         request = '''SELECT * FROM users WHERE name = ? AND password = ?'''
         self.cursor.execute(request,(name, password))
-        print('ЮЗЕР НАЙДЕН УРАААА')
+        print(self.cursor.fetchone())
         return self.cursor.fetchone()
     
     def close_table(self):

@@ -4,7 +4,7 @@ from .frame import Frame
 from .entry_frame import Entry_Text
 from .button_frame import Button
 from ..window_funcs.switch_frames import swith_frame
-from ..data_base.requests_bd import db
+from ..auth_function import auth_function
 
 class App(ctk.CTk):
     '''
@@ -111,11 +111,8 @@ class App(ctk.CTk):
             text = "Login",
             ch_fg_color = "#1f1f1f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: db.find_user(
-                name = self.entry["LOGIN_NAME"].get(),
-                password = self.entry["LOGIN_PASSWORD"].get()
+            ch_command = lambda: auth_function(auth_action = "login", entry_frames = self.entry)
             )
-        )
         self.CONFIRM_BUTTON_LOGIN.pack()
 
         # Создаём кнопку, которая будет переключать на второй Frame
@@ -125,11 +122,7 @@ class App(ctk.CTk):
             text = "Register",
             ch_fg_color = "#1f1f1f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: db.insert_user(
-                name = self.entry["NAME"].get(),
-                password = self.entry["PASSWORD"].get(),
-                email = self.entry["EMAIL"].get()
-            )
+            ch_command = lambda: auth_function(auth_action = "register", entry_frames = self.entry)
         )
         self.CONFIRM_BUTTON.place(x = 100, y = 100)
 
@@ -142,7 +135,5 @@ class App(ctk.CTk):
             ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
         )
         self.LOGIN_BUTTON.place(x = 100, y = 150)
-    def return_entry_dict(self):
-        return self.entry
 
 app = App()
