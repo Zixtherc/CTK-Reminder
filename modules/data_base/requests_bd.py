@@ -5,7 +5,8 @@ class DataBase:
         self.db_path = path_db
         self.connect = sql.connect(self.db_path, check_same_thread = True) 
         self.cursor = self.connect.cursor()
-    def crate_table(self):
+        
+    def create_table(self):
         request = f'''CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY, 
             name TEXT NOT NULL,
@@ -29,4 +30,4 @@ class DataBase:
         self.connect.close()
 
 db = DataBase(path_db = "modules/data_base/database.db")
-# db.crate_table()
+# db.create_table()

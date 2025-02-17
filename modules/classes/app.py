@@ -142,4 +142,7 @@ class App(ctk.CTk):
             ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
         )
         self.LOGIN_BUTTON.place(x = 100, y = 150)
+    def return_entry_dict(self):
+        return self.entry
+
 app = App()
