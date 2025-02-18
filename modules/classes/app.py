@@ -5,6 +5,7 @@ from .entry_frame import Entry_Text
 from .button_frame import Button
 from ..window_funcs.switch_frames import swith_frame
 from ..auth_function import auth_function
+from ..window_funcs import logged_user
 
 class App(ctk.CTk):
     '''
@@ -129,7 +130,7 @@ class App(ctk.CTk):
         self.LOGIN_BUTTON = Button(
             ch_master = self.frames["HEADER"],
             icon_name = "m_glass.png",
-            text = "Login",
+            text = "Login in",
             ch_fg_color = "#1f1f1f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
             ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')

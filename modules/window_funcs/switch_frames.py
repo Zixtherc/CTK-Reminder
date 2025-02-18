@@ -13,6 +13,6 @@ def swith_frame(root: object, frame_name: str, frame_color: str = '#00008b'):
         # Переименовываем
         frame = root.frames[frame_name]
         # Задаём указанный цвет
-        frame.configure(fg_color=frame_color)
+        frame.configure(fg_color = frame_color)
         # Размещаем ( relwidth  это ширина нашего фрейма, который будет "замещать" основной HEADER, и его будет не видно)
         frame.place(x=0, y=0, relwidth=1, relheight=1)

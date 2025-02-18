@@ -31,4 +31,4 @@ class DataBase:
         self.connect.close()
 
 db = DataBase(path_db = "modules/data_base/database.db")
-# db.create_table()
+db.create_table()

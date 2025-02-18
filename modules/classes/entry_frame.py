@@ -36,12 +36,3 @@ class Entry_Text(ctk.CTkEntry):
         self.new_width = max(self.base_width, text_length * 7.5)
         self.configure(width = self.new_width)
         return text 
-    
-    # def add_user_db(self, name: str, password: str = "123", email: str = "12223", event=None) -> None:
-        # name = self.get()
-        # password = self.master.PASSWORD.get()        
-        # email = self.master.EMAIL.get()
-        # # db.insert_user(name=name, password=password, email=email)
-        # print(f'Пользователь с никнеймом: {name}, добавлен')
-        # print(f'Пользователь с паролем: {password}, добавлен')
-        # print(f'Пользователь с email: {email}, добавлен')

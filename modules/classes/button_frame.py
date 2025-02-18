@@ -34,4 +34,3 @@ class Button(ctk.CTkButton):
         except Exception as error:
             print(f'Ошибка при загрузки фото, название ошибки{error}')
             return None
-        
