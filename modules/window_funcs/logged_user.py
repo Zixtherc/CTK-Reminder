@@ -9,4 +9,4 @@ def logged_user(root: ctk.CTk):
     if log_data["user_status"] == "logged":
         swith_frame(root = root, frame_name = "SECOND_HEADER", frame_color = "#D90166")
     elif log_data["user_status"] == "registered":
-        swith_frame(root = root, frame_name = "SECOND_HEADER", frame_color = "#D90166")
+        swith_frame(root = root, frame_name = "HEADER", frame_color = "#A00099")

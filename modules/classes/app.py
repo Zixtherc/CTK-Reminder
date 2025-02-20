@@ -112,7 +112,7 @@ class App(ctk.CTk):
             text = "Login",
             ch_fg_color = "#1f1f1f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: auth_function(auth_action = "login", entry_frames = self.entry)
+            ch_command = lambda: auth_function(auth_action = "login", entry_frames = self.entry, root = self)
             )
         self.CONFIRM_BUTTON_LOGIN.pack()
 
@@ -123,7 +123,7 @@ class App(ctk.CTk):
             text = "Register",
             ch_fg_color = "#1f1f1f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: auth_function(auth_action = "register", entry_frames = self.entry)
+            ch_command = lambda: auth_function(auth_action = "register", entry_frames = self.entry, root = self)
         )
         self.CONFIRM_BUTTON.place(x = 100, y = 100)
 
