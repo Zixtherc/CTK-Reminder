@@ -5,7 +5,6 @@ from .entry_frame import Entry_Text
 from .button_frame import Button
 from ..window_funcs.switch_frames import swith_frame
 from ..auth_function import auth_function
-from ..window_funcs import logged_user
 
 class App(ctk.CTk):
     '''
@@ -36,7 +35,7 @@ class App(ctk.CTk):
             ch_fg_color = "#000000"
         )
         # Размещаем наш основной Frame, в нулевых координатах, т.к он будет занимать весь экран нашего приложения
-        self.frames["HEADER"].place(x = 0, y = 0)
+        # self.frames["HEADER"].place(x = 0, y = 0)
 
         # Создаём второй Frame, но не размещаем, т.к будем на него переключаться 
         self.frames["SECOND_HEADER"] = Frame(
@@ -136,5 +135,12 @@ class App(ctk.CTk):
             ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
         )
         self.LOGIN_BUTTON.place(x = 100, y = 150)
+
+        self.frames["MAIN_FRAME"] = Frame(
+            ch_masther = self,
+            ch_width = self.WIDTH,
+            ch_height = self.HEIGHT,
+            ch_fg_color = "#909090"
+        )
 
 app = App()
