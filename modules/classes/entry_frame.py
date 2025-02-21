@@ -4,7 +4,7 @@ from ..data_base.requests_bd import db
 
 class Entry_Text(ctk.CTkEntry):
     '''
-    Класс который позволит нам создавать поле ввода текста
+    ### Класс который позволит нам создавать поле ввода текста ###
     '''
     def __init__(self, ch_master: object, ch_width: int, ch_height: int, ch_fg_color: str,
                 ch_corner_radius: int, ch_border_width: int, ch_placeholder_text: str, 

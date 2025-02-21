@@ -8,7 +8,7 @@ from ..auth_function import auth_function
 
 class App(ctk.CTk):
     '''
-    Основной `экран` нашего приложение, на `нём` мы будем `размещать` наши `Frame`  
+    ### Основной `экран` нашего приложение, на `нём` мы будем `размещать` наши `Frame` ###
     '''
     def __init__(self):
         data = read_json("config.json")
@@ -26,24 +26,22 @@ class App(ctk.CTk):
         # Список всех наших Frame
         self.frames = {}
         self.entry = {}
+        self.create_header()
+        self.create_second_header()
+        self.main_content()
+
+    def create_header(self):
 
         # Основной Frame, на который мы будем всё крепить 
         self.frames["HEADER"] = Frame(
-            ch_masther = self,
+            ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
             ch_fg_color = "#000000"
         )
         # Размещаем наш основной Frame, в нулевых координатах, т.к он будет занимать весь экран нашего приложения
-        # self.frames["HEADER"].place(x = 0, y = 0)
-
-        # Создаём второй Frame, но не размещаем, т.к будем на него переключаться 
-        self.frames["SECOND_HEADER"] = Frame(
-            ch_masther = self,
-            ch_width = self.WIDTH,
-            ch_height = self.HEIGHT,
-            ch_fg_color = "#00008b"
-        )
+        self.frames["HEADER"].place(x = 0, y = 0)
+        
         self.entry["NAME"] = Entry_Text(
             ch_master = self.frames["HEADER"],
             ch_width = self.frames["HEADER"]._current_width * 0.2,
@@ -52,7 +50,8 @@ class App(ctk.CTk):
             ch_corner_radius = 15,
             ch_border_width = 0.1,
             font_size = 13,
-            ch_placeholder_text = "Enter your name")
+            ch_placeholder_text = "Enter your name"
+        )
         self.entry["NAME"].pack(pady = 20)
 
         self.entry["PASSWORD"] = Entry_Text(
@@ -79,6 +78,36 @@ class App(ctk.CTk):
         )
         self.entry["EMAIL"].pack(pady = 20)
 
+        # Создаём кнопку, которая будет переключать на второй Frame
+        self.CONFIRM_BUTTON = Button(
+            ch_master = self.frames["HEADER"],
+            icon_name = "m_glass.png",
+            text = "Register",
+            ch_fg_color = "#1f1f1f",
+            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
+            ch_command = lambda: auth_function(auth_action = "register", entry_frames = self.entry, root = self)
+        )
+        self.CONFIRM_BUTTON.place(x = 100, y = 100)
+
+    def create_second_header(self):
+        self.LOGIN_BUTTON = Button(
+            ch_master = self.frames["HEADER"],
+            icon_name = "m_glass.png",
+            text = "Login in",
+            ch_fg_color = "#1f1f1f",
+            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
+            ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
+        )
+        self.LOGIN_BUTTON.place(x = 100, y = 150)
+
+        # Создаём второй Frame, но не размещаем, т.к будем на него переключаться 
+        self.frames["SECOND_HEADER"] = Frame(
+            ch_master = self,
+            ch_width = self.WIDTH,
+            ch_height = self.HEIGHT,
+            ch_fg_color = "#00008b"
+        )
+        
         # Создаём поле ввода ( пока не использую )
         self.entry["LOGIN_NAME"] = Entry_Text(
                 ch_master = self.frames["SECOND_HEADER"],
@@ -115,29 +144,10 @@ class App(ctk.CTk):
             )
         self.CONFIRM_BUTTON_LOGIN.pack()
 
-        # Создаём кнопку, которая будет переключать на второй Frame
-        self.CONFIRM_BUTTON = Button(
-            ch_master = self.frames["HEADER"],
-            icon_name = "m_glass.png",
-            text = "Register",
-            ch_fg_color = "#1f1f1f",
-            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: auth_function(auth_action = "register", entry_frames = self.entry, root = self)
-        )
-        self.CONFIRM_BUTTON.place(x = 100, y = 100)
-
-        self.LOGIN_BUTTON = Button(
-            ch_master = self.frames["HEADER"],
-            icon_name = "m_glass.png",
-            text = "Login in",
-            ch_fg_color = "#1f1f1f",
-            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
-        )
-        self.LOGIN_BUTTON.place(x = 100, y = 150)
-
+        
+    def main_content(self):
         self.frames["MAIN_FRAME"] = Frame(
-            ch_masther = self,
+            ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
             ch_fg_color = "#909090"

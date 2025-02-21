@@ -6,7 +6,7 @@ class DataBase:
         self.connect = sql.connect(self.db_path, check_same_thread = True) 
         self.cursor = self.connect.cursor()
         
-    def create_table(self):
+    def create_table(self) -> None:
         request = f'''CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY, 
             name TEXT NOT NULL,
@@ -15,14 +15,15 @@ class DataBase:
         self.cursor.execute(request)
         self.connect.commit()
 
-    def insert_user(self, name : str, password : str, email : str):
+    def insert_user(self, name : str, password : str, email : str) -> bool:
         request = '''INSERT INTO users (name, password, email) VALUES (?, ?, ?)'''
         self.cursor.execute(request, (name, password, email))
         self.connect.commit()
         print(f'')
         return True
+
     
-    def find_user(self,  name : str, password : str):
+    def find_user(self,  name : str, password : str) -> bool: 
         request = '''SELECT * FROM users WHERE name = ? AND password = ?'''
         self.cursor.execute(request,(name, password))
         result = self.cursor.fetchall()

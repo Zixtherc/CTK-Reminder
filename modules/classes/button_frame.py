@@ -11,14 +11,14 @@ from os.path import join, abspath
 
 class Button(ctk.CTkButton):
     '''
-    Класс который позволит нам создавать `Button` используя `наследование`
+    ### Класс который позволит нам создавать `Button` используя `наследование` ###
     '''
     def __init__(self, ch_master: object, icon_name: str,  text: str, ch_fg_color: str,
                 ch_hover_color: str = '#373535', size: float = 20,
                 ch_corner_radius: int = 10, ch_command : object = None,
                 **kwargs):
         '''
-        Метод `конструктор` который принимает в себя параметры: 
+        #### Метод `конструктор` который принимает в себя параметры: ####
 
         - `ch_master`: Объект главного окна;
         - `icon_name`: Название файла из папки `static/icons/` для иконки;
