@@ -30,9 +30,13 @@ class App(ctk.CTk):
         self.create_header()
         self.create_second_header()
         self.main_content()
+        self.calendar_days = {}
 
     def create_header(self):
-
+        '''
+        `Метод`, который позволит нам `объединить` `все` `объекты`, которые хранятся на Frame "HEADER". Нужно для `удобного` ориентирования 
+        по коду
+        '''
         # Основной Frame, на который мы будем всё крепить 
         self.frames["HEADER"] = Frame(
             ch_master = self,
@@ -92,6 +96,10 @@ class App(ctk.CTk):
         self.CONFIRM_BUTTON.place(x = 100, y = 100)
 
     def create_second_header(self):
+        '''
+        `Метод`, который позволит нам `объединить` `все` `объекты`, которые хранятся на Frame "SECOND_HEADER". Нужно для `удобного` ориентирования 
+        по коду. Так же здесь находится кнопка авторизации
+        '''
         self.LOGIN_BUTTON = Button(
             ch_master = self.frames["HEADER"],
             icon_name = "m_glass.png",
@@ -154,5 +162,16 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#909090"
         )
+        
+        self.NOTIFICATION_BUTTON = Button(
+            ch_master = self,
+            icon_name = "m_notification.png",
+            text = " ",
+            ch_fg_color = "#805090",
+            ch_hover_color = "#807090",
+            size = 25,
+            ch_corner_radius = 0,
+            ch_command = None # Пока что None        
+            )
 
 app = App()
