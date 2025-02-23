@@ -6,6 +6,7 @@ from .button_frame import Button
 from ..window_funcs.switch_frames import swith_frame
 from ..auth_function import auth_function
 import asyncio
+from ..calendar.create_calendar import create_calendar
 
 class App(ctk.CTk):
     '''
@@ -173,5 +174,5 @@ class App(ctk.CTk):
             ch_corner_radius = 0,
             ch_command = None # Пока что None        
             )
-
+        create_calendar(parent = self.frames["MAIN_FRAME"])
 app = App()

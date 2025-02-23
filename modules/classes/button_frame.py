@@ -65,13 +65,14 @@ class Button(ctk.CTkButton):
         '''
         # Используем try except для безопасной работы кода
         try:
-            # Получаем путь к иконке из папки static/icons/
-            PATH = abspath(join(__file__, '..',  '..', '..', "static", "icons", self.ICON_NAME))
-            # Возвращаем картинку в нужном разрешении с помощью CTkImage из PIL.Image
-            return ctk.CTkImage(
-                light_image = PIL.Image.open(fp = PATH),
-                size = self.SIZE
-            )
+            if self.ICON_NAME:
+                # Получаем путь к иконке из папки static/icons/
+                PATH = abspath(join(__file__, '..',  '..', '..', "static", "icons", self.ICON_NAME))
+                # Возвращаем картинку в нужном разрешении с помощью CTkImage из PIL.Image
+                return ctk.CTkImage(
+                    light_image = PIL.Image.open(fp = PATH),
+                    size = self.SIZE
+                )
         # Выводим сообщение об ошибке и возвращаем None в случае ошибки, если не возвращать None будет ошибка 
         except Exception as error:
             print(f'Ошибка при загрузки фото, название ошибки{error}')
