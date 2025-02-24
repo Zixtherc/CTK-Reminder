@@ -51,14 +51,12 @@ class DataBase:
         '''
         async with sql.connect(self.db_path) as db:
             async with db.execute('''SELECT * FROM users WHERE name = ? AND password = ?''', (name, password)) as cursor:
-                result = await cursor.fetchone()
+                find_user = await cursor.fetchone()
+                result = find_user[0]
                 return result is not None
 
 # Создаём объект от класса DataBase
 db = DataBase(path_db = "modules/data_base/database.db")
 # Вызываем метод создания базы данных
 
-async def create_database():
-    await db.create_table()
-
-asyncio.run(create_database())
+asyncio.run(db.create_table())

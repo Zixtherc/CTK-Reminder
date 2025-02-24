@@ -41,8 +41,8 @@ async def auth_function(auth_action: str = None, entry_frames: dict = None, root
     elif auth_action == "login":
         # Вызываем метод базы данных, и записываем в переменную flag_login ответ от базы данных
         flag_login = await db.find_user(
-            name = entry_frames["NAME"].get(),
-            password = entry_frames["PASSWORD"].get())
+            name = entry_frames["LOGIN_NAME"].get(),
+            password = entry_frames["LOGIN_PASSWORD"].get())
         # Если флаг True (Пользователь успешно авторизовался), если False, вероятнее всего такого пользователя нету
         if flag_login:
             # Записываем в JSON файл информацию о том, что пользователь авторизовался
