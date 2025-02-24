@@ -7,6 +7,7 @@ from ..window_funcs.switch_frames import swith_frame
 from ..auth_function import auth_function
 import asyncio
 from ..calendar.create_calendar import create_calendar
+from ..calendar.calendars_func import show_entry
 
 class App(ctk.CTk):
     '''
@@ -163,16 +164,29 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#909090"
         )
-        
+
+        self.entry["NOTIFICATION_TEXT"] = Entry_Text(
+            ch_master = self.frames['MAIN_FRAME'],
+            ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
+            ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
+            ch_fg_color = "#f0a2e1",
+            ch_corner_radius = 10,
+            ch_border_width = 0.1,
+            font_size = 12,
+            ch_placeholder_text = "Write something"
+        )
+
         self.NOTIFICATION_BUTTON = Button(
-            ch_master = self,
-            icon_name = "m_notification.png",
+            ch_master = self.frames['MAIN_FRAME'],
+            icon_name = "m_notification.png", # Нужно будет заменить 
             text = " ",
             ch_fg_color = "#805090",
             ch_hover_color = "#807090",
             size = 25,
-            ch_corner_radius = 0,
-            ch_command = None # Пока что None        
+            ch_corner_radius = 0,   
+            ch_command = lambda: show_entry(self.entry["NOTIFICATION_TEXT"])    
             )
+        self.NOTIFICATION_BUTTON.pack(side = "bottom")
         create_calendar(parent = self.frames["MAIN_FRAME"])
+
 app = App()
