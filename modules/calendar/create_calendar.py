@@ -3,7 +3,7 @@ from .calendars_func.calendars import get_count_days
 from .calendars_func.create_note import notify_message
 import customtkinter as ctk
 
-def create_calendar(parent: object = ctk.CTk):
+def create_calendar(entry_frames: dict = {}, parent: object = ctk.CTk):
     count_days = get_count_days()
     for day in range(count_days):
         button = Button(
@@ -14,6 +14,6 @@ def create_calendar(parent: object = ctk.CTk):
             ch_hover_color = "#ad3d3d",
             size = 30,
             ch_corner_radius = 7,
-            ch_command = lambda: notify_message() # В аргументы пока ничего не передаём 
-            )
+            ch_command = lambda: notify_message(entry_frames = entry_frames)
+                )
         button.grid(row=day // 7, column=day % 7, padx=5, pady=5)
