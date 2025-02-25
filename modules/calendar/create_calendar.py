@@ -1,9 +1,15 @@
+# Необходимые импорты
 from ..classes.button_frame import Button
+# Импорт дочерних функций
 from .calendars_func.calendars import get_count_days
 from .calendars_func.create_note import notify_message
+# Не обязательный импорт
 import customtkinter as ctk
 
 def create_calendar(entry_frames: dict = {}, parent: object = ctk.CTk):
+    '''
+    `Функция`, которая `создаёт` такое количество `кнопок`, сколько `дней` в `месяце`
+    '''
     count_days = get_count_days()
     for day in range(count_days):
         button = Button(

@@ -165,17 +165,6 @@ class App(ctk.CTk):
             ch_fg_color = "#909090"
         )
 
-        self.entry["TITLE_NOTE"] = Entry_Text(
-            ch_master = self.frames['MAIN_FRAME'],
-            ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
-            ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
-            ch_fg_color = "#f0a2e1",
-            ch_corner_radius = 10,
-            ch_border_width = 0.1,
-            font_size = 12,
-            ch_placeholder_text = "Write something"
-        )
-
         self.entry["TEXT_NOTE"] = Entry_Text(
             ch_master = self.frames['MAIN_FRAME'],
             ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
@@ -184,7 +173,29 @@ class App(ctk.CTk):
             ch_corner_radius = 10,
             ch_border_width = 0.1,
             font_size = 12,
-            ch_placeholder_text = "Write something"
+            ch_placeholder_text = "Write text"
+            )
+
+        self.entry["TITLE_NOTE"] = Entry_Text(
+            ch_master = self.frames['MAIN_FRAME'],
+            ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
+            ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
+            ch_fg_color = "#f0a2e1",
+            ch_corner_radius = 10,
+            ch_border_width = 0.1,
+            font_size = 12,
+            ch_placeholder_text = "Write title"
+            )
+        
+        self.entry["DURATION_NOTE"] = Entry_Text(
+            ch_master = self.frames['MAIN_FRAME'],
+            ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
+            ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
+            ch_fg_color = "#ffffff",
+            ch_corner_radius = 10,
+            ch_border_width = 0.1,
+            font_size = 12,
+            ch_placeholder_text = "Choose date"
             )
 
         self.NOTIFICATION_BUTTON = Button(
@@ -197,7 +208,8 @@ class App(ctk.CTk):
             ch_corner_radius = 0,   
             ch_command = lambda: show_entry(self.entry)    
             )
+        
         self.NOTIFICATION_BUTTON.pack(side = "bottom")
-        create_calendar(parent = self.frames["MAIN_FRAME"])
+        create_calendar(parent = self.frames["MAIN_FRAME"], entry_frames = self.entry)
 
 app = App()
