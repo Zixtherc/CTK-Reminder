@@ -36,10 +36,13 @@ class DataBase:
         - `password:` Пароль пользователя;
         - `email:` Электронная почта пользователя;
         '''
-        async with sql.connect(self.db_path) as db:
-            await db.execute('''INSERT INTO users (name, password, email) VALUES (?, ?, ?)''', (name, password, email))
-            await db.commit()
-            return True
+        try:
+            async with sql.connect(self.db_path) as db:
+                await db.execute('''INSERT INTO users (name, password, email) VALUES (?, ?, ?)''', (name, password, email))
+                await db.commit()
+                return True
+        except Exception as error:
+            print(f'Ошибка при регистрации пользователя: {error}')
     
     async def find_user(self,  name : str, password : str) -> bool:
         '''
