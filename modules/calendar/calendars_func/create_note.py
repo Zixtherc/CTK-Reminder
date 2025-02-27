@@ -18,6 +18,7 @@ def notify_message(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
     '''
     title = entry_frames["TITLE_NOTE"].get()
     text = entry_frames["TEXT_NOTE"].get()
+    duration = 5 
     try:
         duration = int(entry_frames["DURATION_NOTE"].get())
     except Exception as error:
@@ -29,7 +30,7 @@ def notify_message(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
         print(f'Это текущий день: {now_day}')
         print(f'Это текущая кнопка: {index_day}')
         
-        if now_day >= index_day:
-            print(f'Нельзя ставить напоминания на предыдущии дни')
-        elif now_day <= index_day:
-            toast_notify.show_toast(title = title, msg = text, duration = duration, threaded = True)
+        # if now_day >= index_day:
+        #     print(f'Нельзя ставить напоминания на предыдущии дни')
+        # elif now_day <= index_day:
+        toast_notify.show_toast(title = title, msg = text, duration = duration, threaded = True)

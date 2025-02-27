@@ -22,4 +22,4 @@ def create_calendar(entry_frames: dict = {}, parent: object = ctk.CTk):
             ch_corner_radius = 7,
             ch_command = lambda day = day + 1: notify_message(entry_frames = entry_frames, index_day = day)
                 )
-        button.grid(row=day // 7, column=day % 7, padx=5, pady=5)
+        button.grid(row=day // 7, column = day % 7, padx=5, pady=5)

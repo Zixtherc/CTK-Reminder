@@ -55,8 +55,9 @@ class DataBase:
         async with sql.connect(self.db_path) as db:
             async with db.execute('''SELECT * FROM users WHERE name = ? AND password = ?''', (name, password)) as cursor:
                 find_user = await cursor.fetchone()
-                result = find_user[0]
-                return result is not None
+                if find_user:
+                    result = find_user[0]
+                    return result
 
 # Создаём объект от класса DataBase
 db = DataBase(path_db = "modules/data_base/database.db")

@@ -12,4 +12,4 @@ def show_entry(entry: dict[str, ctk.CTkEntry]):
             entry.place_forget()
             entry.pack_forget()
         else:
-            entry.pack(side = "top")
+            entry.pack(side = "top", pady = 5)

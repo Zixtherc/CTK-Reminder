@@ -137,6 +137,26 @@ class App(ctk.CTk):
         `Метод`, который позволит нам `объединить` `все` `объекты`, которые хранятся на Frame "SECOND_HEADER". Нужно для `удобного` ориентирования 
         по коду. Так же здесь находится кнопка авторизации
         '''
+        # Создаём второй Frame, но не размещаем, т.к будем на него переключаться 
+        self.frames["SECOND_HEADER"] = Frame(
+            ch_master = self,
+            ch_width = self.WIDTH,
+            ch_height = self.HEIGHT,
+            ch_fg_color = "#807880"
+        )
+        
+        self.label["LOG IN"] = Label(
+            ch_master = self.frames["SECOND_HEADER"],
+            ch_width = self.frames["SECOND_HEADER"]._current_width * 0.3,
+            ch_height = self.frames["SECOND_HEADER"]._current_height * 0.2,
+            ch_fg_color = None,
+            ch_text = "Log In",
+            ch_text_color = "#ffffff",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 50, weight = "bold")
+        )
+        self.label['LOG IN'].pack(pady = 50)
+
         self.LOGIN_BUTTON = Button(
             ch_master = self.frames["HEADER"],
             icon_name = "m_glass.png",
@@ -147,21 +167,13 @@ class App(ctk.CTk):
         )
         self.LOGIN_BUTTON.place(x = 100, y = 150)
 
-        # Создаём второй Frame, но не размещаем, т.к будем на него переключаться 
-        self.frames["SECOND_HEADER"] = Frame(
-            ch_master = self,
-            ch_width = self.WIDTH,
-            ch_height = self.HEIGHT,
-            ch_fg_color = "#00008b"
-        )
-        
-        # Создаём поле ввода ( пока не использую )
+        # Создаём поле ввода
         self.entry["LOGIN_NAME"] = Entry_Text(
                 ch_master = self.frames["SECOND_HEADER"],
                 ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
                 ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
                 ch_fg_color = "#ffffff",
-                ch_corner_radius = 15,
+                ch_corner_radius = 6,
                 ch_border_width = 0.1,
                 font_size = 13,
                 ch_placeholder_text = "Enter your name",
@@ -174,7 +186,7 @@ class App(ctk.CTk):
             ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
             ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
             ch_fg_color = "#ffffff",
-            ch_corner_radius = 15,
+            ch_corner_radius = 6,
             ch_border_width = 0.1,
             font_size = 13,
             ch_placeholder_text = "Enter your password",
@@ -205,7 +217,7 @@ class App(ctk.CTk):
             ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
             ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
             ch_fg_color = "#ffffff",
-            ch_corner_radius = 10,
+            ch_corner_radius = 5,
             ch_border_width = 0.1,
             font_size = 12,
             ch_placeholder_text = "Write text"
@@ -216,7 +228,7 @@ class App(ctk.CTk):
             ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
             ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
             ch_fg_color = "#f0a2e1",
-            ch_corner_radius = 10,
+            ch_corner_radius = 5,
             ch_border_width = 0.1,
             font_size = 12,
             ch_placeholder_text = "Write title"
@@ -227,7 +239,7 @@ class App(ctk.CTk):
             ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
             ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
             ch_fg_color = "#ffffff",
-            ch_corner_radius = 10,
+            ch_corner_radius = 5,
             ch_border_width = 0.1,
             font_size = 12,
             ch_placeholder_text = "Choose date"
