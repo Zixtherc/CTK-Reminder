@@ -12,6 +12,7 @@ from .entry_frame import Entry_Text
 from .button_frame import Button
 from .frame import Frame
 from .label import Label
+from .gradient_canvas import Gradient_Canvas
 
 # Импорт функции, для смены фреймов
 from ..window_funcs.switch_frames import swith_frame
