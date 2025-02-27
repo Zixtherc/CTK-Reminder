@@ -1,18 +1,38 @@
+'''
+`Основной` модуль, нашего приложения, вмещает в себя класс `App`, который является нашим приложением
+'''
+# Необходимый импорт 
 import customtkinter as ctk
+
+# Не обязательный импорт *
 from ..jsn_func import read_json
-from .frame import Frame
+
+# Импорты классов для работы :
 from .entry_frame import Entry_Text
 from .button_frame import Button
+from .frame import Frame
+from .label import Label
+
+# Импорт функции, для смены фреймов
 from ..window_funcs.switch_frames import swith_frame
+
+# Импорты функции для авторизации/регистрации
 from ..auth_function import auth_function
-import asyncio
+
+# Импорты для работы с календарем и его функциями
 from ..calendar.create_calendar import create_calendar
 from ..calendar.calendars_func import show_entry
 
+# Необходимый импорт для работы с асинхронностью
+import asyncio
+
+# Класс приложения
 class App(ctk.CTk):
     '''
+    
     ### Основной `экран` нашего приложение, на `нём` мы будем `размещать` наши `Frame` ###
     '''
+    # В будущем буду использовать ctk.set_appearance_mode("light")
     def __init__(self):
         data = read_json("config.json")
         ctk.CTk.__init__(self, fg_color = data["fg_color"])
@@ -29,6 +49,7 @@ class App(ctk.CTk):
         # Список всех наших Frame
         self.frames = {}
         self.entry = {}
+        self.label = {}
         self.create_header()
         self.create_second_header()
         self.main_content()
@@ -44,17 +65,30 @@ class App(ctk.CTk):
             ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
-            ch_fg_color = "#000000"
+            ch_fg_color = "#807880"
         )
         # Размещаем наш основной Frame, в нулевых координатах, т.к он будет занимать весь экран нашего приложения
         self.frames["HEADER"].place(x = 0, y = 0)
         
+        self.label['TITLE'] = Label(
+            ch_master = self.frames["HEADER"],
+            ch_width = self.frames["HEADER"]._current_width * 0.3,
+            ch_height = self.frames["HEADER"]._current_height * 0.2,
+            ch_fg_color = None,
+            ch_text = "NotifyX",
+            ch_text_color = "#ffffff",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 50, weight = "bold")
+        )
+        self.label['TITLE'].pack()
+
+
         self.entry["NAME"] = Entry_Text(
             ch_master = self.frames["HEADER"],
             ch_width = self.frames["HEADER"]._current_width * 0.2,
             ch_height = self.frames["HEADER"]._current_height * 0.05,
             ch_fg_color = "#ffffff",
-            ch_corner_radius = 15,
+            ch_corner_radius = 6,
             ch_border_width = 0.1,
             font_size = 13,
             ch_placeholder_text = "Enter your name"
@@ -66,7 +100,7 @@ class App(ctk.CTk):
             ch_width = self.frames["HEADER"]._current_width * 0.2,
             ch_height = self.frames["HEADER"]._current_height * 0.05,
             ch_fg_color = "#ffffff",
-            ch_corner_radius = 15,
+            ch_corner_radius = 6,
             ch_border_width = 0.1,
             font_size = 13,
             ch_placeholder_text = "Enter your password",

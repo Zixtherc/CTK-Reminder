@@ -25,19 +25,16 @@ async def auth_function(auth_action: str = None, entry_frames: dict = None, root
     '''
     # Если пользователь выбрал регистрацию
     if auth_action == 'register':
-        print(entry_frames["NAME"].get(),entry_frames["PASSWORD"].get(),entry_frames["EMAIL"].get())
-        print(f'================================================================')
         # Вызываем метод базы данных, и записываем в переменную flag_register ответ от базы данных
         # Метод get() позволяет нам взять текст с фреймов Entry 
         if not all([entry_frames["NAME"].get().strip(), entry_frames["PASSWORD"].get().strip(), entry_frames["EMAIL"].get().strip()]):
-            print(f'УРАААААААААААААААААААААААААААААААААААА')
-            TopLevelWidget(ch_master = root, ch_width = 700, ch_height = 500, ch_fg_color = "#808080", label_text = "Error")
+            TopLevelWidget(ch_master = root, ch_width = 350, ch_height = 300, ch_fg_color = "#808080", label_text = "Error: You cannot leave the input fields empty")
             return
         flag_register = await db.insert_user(
             name = entry_frames["NAME"].get(),
             password = entry_frames["PASSWORD"].get(),
             email = entry_frames["EMAIL"].get())
-        print(entry_frames["NAME"].get(),entry_frames["PASSWORD"].get(),entry_frames["EMAIL"].get())
+
         # Если флаг True (Пользователь успешно зарегистрировался), если False, вероятнее всего произошла ошибка 
         if flag_register:
             # Записываем в JSON файл информацию о том, что пользователь зарегистрировался
