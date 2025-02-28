@@ -26,8 +26,8 @@ def notify_message(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
     # Используем блок try except finally, для безопастности
     try:
         # Пробуем получить информацию через сколько появится уведомление
-        duration = int(entry_frames["DURATION_NOTE"].get())
-
+        notify_delay = int(entry_frames["DURATION_NOTE"].get())
+        notify_date = dttime.datetime.strptime(notify_delay, '%Y-%m-%d')
     # Отлавливаем ошибку, и сообщаем ошибку пользователю
     except Exception as error:
         # Выводим ошибку пользователю с помощью уведомления
@@ -35,13 +35,24 @@ def notify_message(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
 
     # Далее идёт код, который В ЛЮБОМ СЛУЧАЕ, будет воспроизведён
     finally:
+        # Получаем текущее время
+        now = dttime.datetime.now()
+
         # Получаем текущее время у пользователю
-        now = dttime.datetime.strptime("25 02 28", "%y %m %d")
-        future_time = dttime.datetime.strptime(f'{now.year} {now.month} {index_day}', '%Y %m %d')
+        now = dttime.datetime.strptime(f"{now.year} {now.month} {now.day}", "%Y %m %d")
+
+        # Получаем будущее время, в которое прийдёт уведомление
+        future_time = dttime.datetime.strptime(f'{notify_delay[0]} {notify_delay[1]} {notify_delay[-1]}', '%Y %m %d')
+
+        # Преобразовываем время в кортеж
         future_time_struct_time = future_time.timetuple()
-        future_time_timestamp = time.mktime(future_time_struct_time)
         now_struct_time = now.timetuple()
+
+        # Получаем Unix timestamp для будущего и текущего времени
+        future_time_timestamp = time.mktime(future_time_struct_time)
         now_time_timestamp = time.mktime(now_struct_time)
+
+        # Выводим разницу во времени между текущим и будущим временем в консоль
         print(now_time_timestamp - future_time_timestamp)
 
         
