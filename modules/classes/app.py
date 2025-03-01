@@ -12,7 +12,6 @@ from .entry_frame import Entry_Text
 from .button_frame import Button
 from .frame import Frame
 from .label import Label
-from .gradient_canvas import Gradient_Canvas
 
 # Импорт функции, для смены фреймов
 from ..window_funcs.switch_frames import swith_frame
@@ -66,7 +65,7 @@ class App(ctk.CTk):
             ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
-            ch_fg_color = "#807880"
+            ch_fg_color = "#1d1d1d"
         )
         # Размещаем наш основной Frame, в нулевых координатах, т.к он будет занимать весь экран нашего приложения
         self.frames["HEADER"].place(x = 0, y = 0)
@@ -77,7 +76,7 @@ class App(ctk.CTk):
             ch_height = self.frames["HEADER"]._current_height * 0.2,
             ch_fg_color = None,
             ch_text = "NotifyX",
-            ch_text_color = "#ffffff",
+            ch_text_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_font = ctk.CTkFont(family = "Roboto", size = 50, weight = "bold")
         )
@@ -88,7 +87,7 @@ class App(ctk.CTk):
             ch_master = self.frames["HEADER"],
             ch_width = self.frames["HEADER"]._current_width * 0.2,
             ch_height = self.frames["HEADER"]._current_height * 0.05,
-            ch_fg_color = "#ffffff",
+            ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_border_width = 0.1,
             font_size = 13,
@@ -100,7 +99,7 @@ class App(ctk.CTk):
             ch_master = self.frames["HEADER"],
             ch_width = self.frames["HEADER"]._current_width * 0.2,
             ch_height = self.frames["HEADER"]._current_height * 0.05,
-            ch_fg_color = "#ffffff",
+            ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_border_width = 0.1,
             font_size = 13,
@@ -112,7 +111,7 @@ class App(ctk.CTk):
             ch_master = self.frames["HEADER"],
             ch_width = self.frames["HEADER"]._current_width * 0.2,
             ch_height = self.frames["HEADER"]._current_height * 0.05,
-            ch_fg_color = "#ffffff",
+            ch_fg_color = "#ff41a6",
             ch_corner_radius = 15,
             ch_border_width = 0.1,
             font_size = 13,
@@ -125,9 +124,9 @@ class App(ctk.CTk):
             ch_master = self.frames["HEADER"],
             icon_name = "m_glass.png",
             text = "Register",
-            ch_fg_color = "#1f1f1f",
+            ch_fg_color = "#61004f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: asyncio.run(auth_function(auth_action="register", entry_frames=self.entry, root=self))
+            ch_command = lambda: asyncio.run(auth_function(auth_action = "register", entry_frames = self.entry, root = self))
             )
         
         self.CONFIRM_BUTTON.place(x = 100, y = 100)
@@ -142,7 +141,7 @@ class App(ctk.CTk):
             ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
-            ch_fg_color = "#807880"
+            ch_fg_color = "#1d1d1d"
         )
         
         self.label["LOG IN"] = Label(
@@ -151,7 +150,7 @@ class App(ctk.CTk):
             ch_height = self.frames["SECOND_HEADER"]._current_height * 0.2,
             ch_fg_color = None,
             ch_text = "Log In",
-            ch_text_color = "#ffffff",
+            ch_text_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_font = ctk.CTkFont(family = "Roboto", size = 50, weight = "bold")
         )
@@ -161,7 +160,7 @@ class App(ctk.CTk):
             ch_master = self.frames["HEADER"],
             icon_name = "m_glass.png",
             text = "Login in",
-            ch_fg_color = "#1f1f1f",
+            ch_fg_color = "#61004f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
             ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
         )
@@ -172,7 +171,7 @@ class App(ctk.CTk):
                 ch_master = self.frames["SECOND_HEADER"],
                 ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
                 ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
-                ch_fg_color = "#ffffff",
+                ch_fg_color = "#ff41a6",
                 ch_corner_radius = 6,
                 ch_border_width = 0.1,
                 font_size = 13,
@@ -185,7 +184,7 @@ class App(ctk.CTk):
             ch_master = self.frames["SECOND_HEADER"],
             ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
             ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
-            ch_fg_color = "#ffffff",
+            ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_border_width = 0.1,
             font_size = 13,
@@ -197,7 +196,7 @@ class App(ctk.CTk):
             ch_master = self.frames["SECOND_HEADER"],
             icon_name = "m_glass.png",
             text = "Login",
-            ch_fg_color = "#1f1f1f",
+            ch_fg_color = "#61004f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
             ch_command = lambda: asyncio.run(auth_function(auth_action = "login", entry_frames = self.entry, root = self))
             )
@@ -209,14 +208,14 @@ class App(ctk.CTk):
             ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
-            ch_fg_color = "#909090"
+            ch_fg_color = "#1d1d1d"
         )
 
         self.entry["TEXT_NOTE"] = Entry_Text(
             ch_master = self.frames['MAIN_FRAME'],
             ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
             ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
-            ch_fg_color = "#ffffff",
+            ch_fg_color = "#ff41a6",
             ch_corner_radius = 5,
             ch_border_width = 0.1,
             font_size = 12,
@@ -227,7 +226,7 @@ class App(ctk.CTk):
             ch_master = self.frames['MAIN_FRAME'],
             ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
             ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
-            ch_fg_color = "#f0a2e1",
+            ch_fg_color = "#ff41a6",
             ch_corner_radius = 5,
             ch_border_width = 0.1,
             font_size = 12,
@@ -238,7 +237,7 @@ class App(ctk.CTk):
             ch_master = self.frames['MAIN_FRAME'],
             ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
             ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
-            ch_fg_color = "#ffffff",
+            ch_fg_color = "#ff41a6",
             ch_corner_radius = 5,
             ch_border_width = 0.1,
             font_size = 12,
@@ -249,8 +248,8 @@ class App(ctk.CTk):
             ch_master = self.frames['MAIN_FRAME'],  
             icon_name = "m_notification.png", # Нужно будет заменить 
             text = " ",
-            ch_fg_color = "#805090",
-            ch_hover_color = "#807090",
+            ch_fg_color = "#61004f",
+            ch_hover_color = "#53104f",
             size = 25,
             ch_corner_radius = 0,   
             ch_command = lambda: show_entry(self.entry)    

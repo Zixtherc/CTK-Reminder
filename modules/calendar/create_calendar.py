@@ -16,8 +16,8 @@ def create_calendar(entry_frames: dict = {}, parent: object = ctk.CTk):
             ch_master = parent,
             icon_name = None,
             text = str(day + 1),
-            ch_fg_color = "#505050",
-            ch_hover_color = "#ad3d3d",
+            ch_fg_color = "#61004f",
+            ch_hover_color = "#510740",
             size = 30,
             ch_corner_radius = 7,
             ch_command = lambda day = day + 1: notify_message(entry_frames = entry_frames, index_day = day)

@@ -73,6 +73,7 @@ class Button(ctk.CTkButton):
                     light_image = PIL.Image.open(fp = PATH),
                     size = self.SIZE
                 )
+        
         # Выводим сообщение об ошибке и возвращаем None в случае ошибки, если не возвращать None будет ошибка 
         except Exception as error:
             print(f'Ошибка при загрузки фото, название ошибки{error}')
