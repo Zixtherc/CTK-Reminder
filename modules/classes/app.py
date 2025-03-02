@@ -54,7 +54,7 @@ class App(ctk.CTk):
         self.register_header()
         self.login_header()
         self.main_content()
-        self.calendar_days = {}
+        self.create_note_header()
 
     def welcome_header(self):
         
@@ -246,58 +246,82 @@ class App(ctk.CTk):
         self.CONFIRM_BUTTON_LOGIN.pack()
 
     def main_content(self):
+
         self.frames["MAIN_FRAME"] = Frame(
             ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
         )
-
-        self.entry["TEXT_NOTE"] = Entry_Text(
-            ch_master = self.frames['MAIN_FRAME'],
-            ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
-            ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
-            ch_fg_color = "#ff41a6",
-            ch_corner_radius = 5,
-            ch_border_width = 0.1,
-            font_size = 12,
-            ch_placeholder_text = "Write text"
-            )
-
-        self.entry["TITLE_NOTE"] = Entry_Text(
-            ch_master = self.frames['MAIN_FRAME'],
-            ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
-            ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
-            ch_fg_color = "#ff41a6",
-            ch_corner_radius = 5,
-            ch_border_width = 0.1,
-            font_size = 12,
-            ch_placeholder_text = "Write title"
-            )
-        
-        self.entry["DURATION_NOTE"] = Entry_Text(
-            ch_master = self.frames['MAIN_FRAME'],
-            ch_width = self.frames['MAIN_FRAME']._current_width * 0.2,
-            ch_height = self.frames['MAIN_FRAME']._current_height * 0.05,
-            ch_fg_color = "#ff41a6",
-            ch_corner_radius = 5,
-            ch_border_width = 0.1,
-            font_size = 12,
-            ch_placeholder_text = "Choose date"
-            )
-
-        self.NOTIFICATION_BUTTON = Button(
-            ch_master = self.frames['MAIN_FRAME'],  
-            icon_name = "m_notification.png", # Нужно будет заменить 
-            text = " ",
-            ch_fg_color = "#61004f",
-            ch_hover_color = "#53104f",
-            size = 25,
-            ch_corner_radius = 0,   
-            ch_command = lambda: show_entry(self.entry)    
-            )
-        
-        self.NOTIFICATION_BUTTON.pack(side = "bottom")
         create_calendar(parent = self.frames["MAIN_FRAME"], entry_frames = self.entry)
 
+        self.SETTINGS_BUTTON = Button(
+            ch_master = self.frames["MAIN_FRAME"],
+            icon_name = "dots_setting.png",
+            text = "Login",
+            ch_fg_color = "#61004f",
+            ch_command = lambda: None # Пока ничего не передаём
+            )
+        self.SETTINGS_BUTTON.pack(pady = 10)
+
+        self.TIME_LINE_NOTES_BUTTON = Button(
+            ch_master = self.frames["MAIN_FRAME"],
+            icon_name = "dots_setting.png",
+            text = "Login",
+            ch_fg_color = "#61004f",
+            ch_command = lambda: None # Пока ниче не передаём
+            )
+        self.TIME_LINE_NOTES_BUTTON.pack(pady = 10)
+        
+        self.ADD_NOTE_BUTTON = Button(
+            ch_master = self.frames["MAIN_FRAME"],
+            icon_name = "white_plus.png",
+            text = " ",
+            ch_hover_color = "#1d1d1d",
+            ch_fg_color = "transparent",
+            ch_command = lambda: swith_frame(root = self, frame_name = "CREATE_NOTE_HEADER")
+        )
+        self.ADD_NOTE_BUTTON.pack(pady = 10)
+    
+    def create_note_header(self):
+
+        self.frames["CREATE_NOTE_HEADER"] = Frame(
+            ch_master = self,
+            ch_width = self.WIDTH,
+            ch_height = self.HEIGHT,
+            ch_fg_color = "#1d1d1d"
+        )
+
+        self.entry["TITLE_NOTE"] = Entry_Text(
+            ch_master = self.frames["CREATE_NOTE_HEADER"],
+            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.7,
+            ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.05,
+            ch_fg_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_border_width = 0.1,
+            font_size = 13,
+            ch_placeholder_text = "Enter your title"
+        )
+        self.entry["TITLE_NOTE"].pack(pady = 20)
+
+        self.entry["TEXT_NOTE"] = Entry_Text(
+            ch_master = self.frames["CREATE_NOTE_HEADER"],
+            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.7,
+            ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.5,
+            ch_fg_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_border_width = 0.1,
+            font_size = 13,
+            ch_placeholder_text = "Enter your note text"
+        )
+        self.entry["TEXT_NOTE"].pack(pady = 20)
+
+        self.SAVE_NOTE_BUTTON = Button(
+            ch_master = self.frames["CREATE_NOTE_HEADER"],
+            icon_name = " ",
+            text = "Save",
+            ch_fg_color = "#61004f",
+            ch_command = lambda: None # Пока ничего не добавляем
+        )
+        self.SAVE_NOTE_BUTTON.pack(pady = 20)
 app = App()
