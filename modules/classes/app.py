@@ -50,30 +50,26 @@ class App(ctk.CTk):
         self.frames = {}
         self.entry = {}
         self.label = {}
-        self.create_header()
-        self.create_second_header()
+        self.welcome_header()
+        self.register_header()
+        self.login_header()
         self.main_content()
         self.calendar_days = {}
 
-    def create_header(self):
-        '''
-        `Метод`, который позволит нам `объединить` `все` `объекты`, которые хранятся на Frame "HEADER". Нужно для `удобного` ориентирования 
-        по коду
-        '''
-        # Основной Frame, на который мы будем всё крепить 
-        self.frames["HEADER"] = Frame(
+    def welcome_header(self):
+        
+        self.frames["WELCOME_HEADER"] = Frame(
             ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
         )
-        # Размещаем наш основной Frame, в нулевых координатах, т.к он будет занимать весь экран нашего приложения
-        self.frames["HEADER"].place(x = 0, y = 0)
-        
+        self.frames["WELCOME_HEADER"].place(x = 0, y = 0)
+
         self.label['TITLE'] = Label(
-            ch_master = self.frames["HEADER"],
-            ch_width = self.frames["HEADER"]._current_width * 0.3,
-            ch_height = self.frames["HEADER"]._current_height * 0.2,
+            ch_master = self.frames["WELCOME_HEADER"],
+            ch_width = self.frames["WELCOME_HEADER"]._current_width * 0.3,
+            ch_height = self.frames["WELCOME_HEADER"]._current_height * 0.2,
             ch_fg_color = None,
             ch_text = "NotifyX",
             ch_text_color = "#ff41a6",
@@ -82,11 +78,69 @@ class App(ctk.CTk):
         )
         self.label['TITLE'].pack()
 
+        self.label['CONTENT'] = Label(
+            ch_master = self.frames["WELCOME_HEADER"],
+            ch_width = self.frames["WELCOME_HEADER"]._current_width * 1,
+            ch_height = self.frames["WELCOME_HEADER"]._current_height * 0.1,
+            ch_fg_color = None,
+            ch_text = "Create reminders, get notifications, and add them to Google Calendar with one check",
+            ch_text_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 15, weight = "bold")
+        )
+        self.label['CONTENT'].pack()
+
+        self.REGISTER_BUTTON = Button(
+            ch_master = self.frames["WELCOME_HEADER"],
+            icon_name = "m_glass.png",
+            text = "Register",
+            ch_fg_color = "#61004f",
+            size = 35,
+            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
+            ch_command = lambda: swith_frame(root = self, frame_name = 'REGISTER_HEADER')
+        )
+        self.REGISTER_BUTTON.place(x = 200, y = 250)
+
+        self.LOGIN_BUTTON = Button(
+            ch_master = self.frames["WELCOME_HEADER"],
+            icon_name = "m_glass.png",
+            text = "Login",
+            ch_fg_color = "#61004f",
+            size = 35,
+            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
+            ch_command = lambda: swith_frame(root = self, frame_name = "LOGIN_HEADER")
+        )
+        self.LOGIN_BUTTON.place(x = 500, y = 250)
+
+    def register_header(self):
+        '''
+        `Метод`, который позволит нам `объединить` `все` `объекты`, которые хранятся на Frame "REGISTER_HEADER". Нужно для `удобного` ориентирования 
+        по коду
+        '''
+        # Основной Frame, на который мы будем всё крепить 
+        self.frames["REGISTER_HEADER"] = Frame(
+            ch_master = self,
+            ch_width = self.WIDTH,
+            ch_height = self.HEIGHT,
+            ch_fg_color = "#1d1d1d"
+        )
+
+        self.label['WELCOME_BACK'] = Label(
+            ch_master = self.frames["REGISTER_HEADER"],
+            ch_width = self.frames["REGISTER_HEADER"]._current_width * 0.5,
+            ch_height = self.frames["REGISTER_HEADER"]._current_height * 0.2,
+            ch_fg_color = None,
+            ch_text = " Hello, what are you planning ?",
+            ch_text_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 25, weight = "bold")
+        )
+        self.label['WELCOME_BACK'].pack()
 
         self.entry["NAME"] = Entry_Text(
-            ch_master = self.frames["HEADER"],
-            ch_width = self.frames["HEADER"]._current_width * 0.2,
-            ch_height = self.frames["HEADER"]._current_height * 0.05,
+            ch_master = self.frames["REGISTER_HEADER"],
+            ch_width = self.frames["REGISTER_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["REGISTER_HEADER"]._current_height * 0.05,
             ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_border_width = 0.1,
@@ -96,9 +150,9 @@ class App(ctk.CTk):
         self.entry["NAME"].pack(pady = 20)
 
         self.entry["PASSWORD"] = Entry_Text(
-            ch_master = self.frames["HEADER"],
-            ch_width = self.frames["HEADER"]._current_width * 0.2,
-            ch_height = self.frames["HEADER"]._current_height * 0.05,
+            ch_master = self.frames["REGISTER_HEADER"],
+            ch_width = self.frames["REGISTER_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["REGISTER_HEADER"]._current_height * 0.05,
             ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_border_width = 0.1,
@@ -108,9 +162,9 @@ class App(ctk.CTk):
         self.entry["PASSWORD"].pack(pady = 20)
         
         self.entry["EMAIL"] = Entry_Text(
-            ch_master = self.frames["HEADER"],
-            ch_width = self.frames["HEADER"]._current_width * 0.2,
-            ch_height = self.frames["HEADER"]._current_height * 0.05,
+            ch_master = self.frames["REGISTER_HEADER"],
+            ch_width = self.frames["REGISTER_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["REGISTER_HEADER"]._current_height * 0.05,
             ch_fg_color = "#ff41a6",
             ch_corner_radius = 15,
             ch_border_width = 0.1,
@@ -119,25 +173,24 @@ class App(ctk.CTk):
         )
         self.entry["EMAIL"].pack(pady = 20)
 
-        # Создаём кнопку, которая будет переключать на второй Frame
         self.CONFIRM_BUTTON = Button(
-            ch_master = self.frames["HEADER"],
+            ch_master = self.frames["REGISTER_HEADER"],
             icon_name = "m_glass.png",
             text = "Register",
             ch_fg_color = "#61004f",
+            size = 50,
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
             ch_command = lambda: asyncio.run(auth_function(auth_action = "register", entry_frames = self.entry, root = self))
-            )
-        
-        self.CONFIRM_BUTTON.place(x = 100, y = 100)
+        )
+        self.CONFIRM_BUTTON.pack(pady = 30)
 
-    def create_second_header(self):
+    def login_header(self):
         '''
-        `Метод`, который позволит нам `объединить` `все` `объекты`, которые хранятся на Frame "SECOND_HEADER". Нужно для `удобного` ориентирования 
+        `Метод`, который позволит нам `объединить` `все` `объекты`, которые хранятся на Frame "LOGIN_HEADER". Нужно для `удобного` ориентирования 
         по коду. Так же здесь находится кнопка авторизации
         '''
         # Создаём второй Frame, но не размещаем, т.к будем на него переключаться 
-        self.frames["SECOND_HEADER"] = Frame(
+        self.frames["LOGIN_HEADER"] = Frame(
             ch_master = self,
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
@@ -145,32 +198,22 @@ class App(ctk.CTk):
         )
         
         self.label["LOG IN"] = Label(
-            ch_master = self.frames["SECOND_HEADER"],
-            ch_width = self.frames["SECOND_HEADER"]._current_width * 0.3,
-            ch_height = self.frames["SECOND_HEADER"]._current_height * 0.2,
+            ch_master = self.frames["LOGIN_HEADER"],
+            ch_width = self.frames["LOGIN_HEADER"]._current_width * 0.5,
+            ch_height = self.frames["LOGIN_HEADER"]._current_height * 0.2,
             ch_fg_color = None,
-            ch_text = "Log In",
+            ch_text = "Welcome back to NotifyX",
             ch_text_color = "#ff41a6",
             ch_corner_radius = 6,
-            ch_font = ctk.CTkFont(family = "Roboto", size = 50, weight = "bold")
+            ch_font = ctk.CTkFont(family = "Roboto", size = 30, weight = "bold")
         )
         self.label['LOG IN'].pack(pady = 50)
 
-        self.LOGIN_BUTTON = Button(
-            ch_master = self.frames["HEADER"],
-            icon_name = "m_glass.png",
-            text = "Login in",
-            ch_fg_color = "#61004f",
-            # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: swith_frame(root = self, frame_name = 'SECOND_HEADER')
-        )
-        self.LOGIN_BUTTON.place(x = 100, y = 150)
-
         # Создаём поле ввода
         self.entry["LOGIN_NAME"] = Entry_Text(
-                ch_master = self.frames["SECOND_HEADER"],
-                ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
-                ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
+                ch_master = self.frames["LOGIN_HEADER"],
+                ch_width = self.frames["LOGIN_HEADER"]._current_width * 0.2,
+                ch_height = self.frames["LOGIN_HEADER"]._current_height * 0.05,
                 ch_fg_color = "#ff41a6",
                 ch_corner_radius = 6,
                 ch_border_width = 0.1,
@@ -181,9 +224,9 @@ class App(ctk.CTk):
         self.entry["LOGIN_NAME"].place(x = 300, y = 150)
         
         self.entry["LOGIN_PASSWORD"] = Entry_Text(
-            ch_master = self.frames["SECOND_HEADER"],
-            ch_width = self.frames["SECOND_HEADER"]._current_width * 0.2,
-            ch_height = self.frames["SECOND_HEADER"]._current_height * 0.05,
+            ch_master = self.frames["LOGIN_HEADER"],
+            ch_width = self.frames["LOGIN_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["LOGIN_HEADER"]._current_height * 0.05,
             ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_border_width = 0.1,
@@ -193,7 +236,7 @@ class App(ctk.CTk):
         self.entry["LOGIN_PASSWORD"].place(x = 300, y = 50)
 
         self.CONFIRM_BUTTON_LOGIN = Button(
-            ch_master = self.frames["SECOND_HEADER"],
+            ch_master = self.frames["LOGIN_HEADER"],
             icon_name = "m_glass.png",
             text = "Login",
             ch_fg_color = "#61004f",
@@ -202,7 +245,6 @@ class App(ctk.CTk):
             )
         self.CONFIRM_BUTTON_LOGIN.pack()
 
-        
     def main_content(self):
         self.frames["MAIN_FRAME"] = Frame(
             ch_master = self,
