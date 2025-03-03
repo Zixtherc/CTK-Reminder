@@ -55,6 +55,7 @@ class App(ctk.CTk):
         self.login_header()
         self.main_content()
         self.create_note_header()
+        self.settings_header()
 
     def welcome_header(self):
         
@@ -258,9 +259,9 @@ class App(ctk.CTk):
         self.SETTINGS_BUTTON = Button(
             ch_master = self.frames["MAIN_FRAME"],
             icon_name = "dots_setting.png",
-            text = "Login",
+            text = "Settings Button",
             ch_fg_color = "#61004f",
-            ch_command = lambda: None # Пока ничего не передаём
+            ch_command = lambda: swith_frame(root = self, frame_name = "SETTINGS_HEADER")
             )
         self.SETTINGS_BUTTON.pack(pady = 10)
 
@@ -290,7 +291,7 @@ class App(ctk.CTk):
             ch_width = self.WIDTH,
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
-        )
+        ) 
 
         self.entry["TITLE_NOTE"] = Entry_Text(
             ch_master = self.frames["CREATE_NOTE_HEADER"],
@@ -324,4 +325,60 @@ class App(ctk.CTk):
             ch_command = lambda: None # Пока ничего не добавляем
         )
         self.SAVE_NOTE_BUTTON.pack(pady = 20)
+
+    def settings_header(self):
+
+        self.frames["SETTINGS_HEADER"] = Frame(
+            ch_master = self,
+            ch_width = self.WIDTH,
+            ch_height = self.HEIGHT,
+            ch_fg_color = "#1d1d1d"
+        )
+        
+        self.label['NOTIFICATION_SETTINGS'] = Label(
+            ch_master = self.frames["SETTINGS_HEADER"],
+            ch_width = self.frames["SETTINGS_HEADER"]._current_width * 0.5,
+            ch_height = self.frames["SETTINGS_HEADER"]._current_height * 0.2,
+            ch_fg_color = None,
+            ch_text = "Nofication settings",
+            ch_text_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 30, weight = "bold")
+        )
+        self.label['NOTIFICATION_SETTINGS'].pack(pady = 20)
+
+        self.label['EXTRAS_SETTINGS'] = Label(
+            ch_master = self.frames["SETTINGS_HEADER"],
+            ch_width = self.frames["SETTINGS_HEADER"]._current_width * 0.5,
+            ch_height = self.frames["SETTINGS_HEADER"]._current_height * 0.2,
+            ch_fg_color = None,
+            ch_text = "Extras",
+            ch_text_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 30, weight = "bold")
+        )
+        self.label['EXTRAS_SETTINGS'].pack(pady = 50)
+
+        self.HELP_BUTTON = Button(
+            ch_master = self.frames["SETTINGS_HEADER"],
+            icon_name = "    ",
+            text = " Help ",
+            size = 50,
+            ch_hover_color = "#1d1d1d",
+            ch_fg_color = "transparent",
+            ch_command = lambda: swith_frame(root = self, frame_name = "HELP_HEADER")
+        )
+        self.HELP_BUTTON.pack(pady = 10)
+
+        self.ABOUT_BUTTON = Button(
+            ch_master = self.frames["SETTINGS_HEADER"],
+            icon_name = "    ",
+            text = " About us ",
+            size = 50,
+            ch_hover_color = "#1d1d1d",
+            ch_fg_color = "transparent",
+            ch_command = lambda: None # Пока ничего не передаём, в будущем тут должна быть анимация
+        )
+        self.ABOUT_BUTTON.pack(pady = 10)
+        
 app = App()
