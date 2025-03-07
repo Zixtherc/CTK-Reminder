@@ -1,13 +1,12 @@
 # Список нажатых кнопок
 selected_button = [None]
 
-def select_button(index_button: int, color_select: str = "#ff41a6", all_buttons: list = [], reset_color: str = "#909090"):
+def select_button(index_button: int, color_select: str = "#000000", all_buttons: list = [], reset_color: str = "#909090"):
     '''
     `Функция`, для `смены` цвета, при `нажатии` на кнопку, если `повторно` нажать на `любую` `другую`, то цвет `прошлой` кнопки `изменится` на указанный
     '''
     # Проверяем что список нажатых кнопок не пуст
-    if selected_button[0]:
-
+    if selected_button[0] is not None:
         # Если есть, то меняем цвет кнопки, на которую был нажат ранее
         all_buttons[selected_button[0]].configure(fg_color = reset_color)
     
