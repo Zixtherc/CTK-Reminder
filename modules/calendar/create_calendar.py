@@ -1,9 +1,11 @@
 # Необходимые импорты
 from ..classes.button_frame import Button
+
 # Импорт дочерних функций
 from .calendars_func.calendars import get_count_days
-from .calendars_func.create_note import notify_message
+from .calendars_func.create_note import create_notify
 from .calendars_func.selected_button import select_button
+
 # Не обязательный импорт
 import customtkinter as ctk
 
@@ -23,8 +25,8 @@ def create_calendar(entry_frames: dict = {}, parent: object = ctk.CTk):
             ch_hover_color = "#901873",
             size = 30,
             ch_corner_radius = 7,
-            ch_command = lambda day = day + 1: (notify_message(entry_frames = entry_frames, index_day = day), select_button(index_button = day - 1, all_buttons = all_button))
-            )
+            ch_command = lambda day = day + 1: ((create_notify(entry_frames = entry_frames, index_day = day), 
+            select_button(index_button = day - 1, all_buttons = all_button))))
         all_button.append(button)  
         
         button.grid(row = day // 7, column = day % 7, padx = 5, pady = 5)

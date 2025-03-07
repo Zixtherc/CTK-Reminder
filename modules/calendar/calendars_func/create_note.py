@@ -4,20 +4,45 @@
 
 # Необходимый импорт
 from win10toast import ToastNotifier
+
 # Необязательный импорт 
 import customtkinter as ctk
 
+# Необходимый модуль для работы с потоками, они нам позволят закрыть приложение, 
+# и увидеть приложение, так же помогут не "останавливать" приложение при задержки уведомления
+import threading as thread
+
+
 # Создаем объект от класса
 toast_notify = ToastNotifier()
+
+# Создаем первый поток ( в будущем их будет столько, сколько уведомлений решил сделать пользователь )
+
+
 # Необходимый модуль для работы с временем, в нашем случае для работы с отложенными уведомлениями
 import datetime as dttime
 import time
 
-def notify_message(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
+def notify(title: str = "error", message: str = "error", duration: int = 5, delay_notify: int = 5):
     '''
     `Функция`, которая показывает уведомление с помощью `win10toast`
     '''
-    pass
+    toast_notify.show_toast(title = title, duration = 5, message = message, threaded = True)
+
+def create_notify(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
+    '''
+    `Функция`, которая показывает уведомление с помощью `win10toast`
+    '''
+    
+    title = entry_frames["TITLE_NOTE"].get()
+    text = entry_frames["TEXT_NOTE"].get()
+    duration = 5
+    while True:
+        time.sleep(5)
+        print(f'Получилось запустить поток')
+
+first_thread = thread.Thread(target=create_notify)
+
     # # Получаем значения из Entry полей
     # title = entry_frames["TITLE_NOTE"].get()
     # text = entry_frames["TEXT_NOTE"].get()
@@ -62,3 +87,5 @@ def notify_message(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
     #     # elif now_day <= index_day:
         
     #     toast_notify.show_toast(title = title, msg = text, duration = duration, threaded = True)
+
+first_thread.start()
