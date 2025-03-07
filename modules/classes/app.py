@@ -16,7 +16,10 @@ from .label import Label
 # Импорт функции, для смены фреймов
 from ..window_funcs.switch_frames import swith_frame
 
-# Импорты функции для авторизации/регистрации
+# Импорт функции, для работы с проверкой почты
+from ..google.validation_email import check_validation_email
+
+# Импорты функции, для авторизации/регистрации
 from ..auth_function import auth_function
 
 # Импорты для работы с календарем и его функциями
@@ -181,7 +184,9 @@ class App(ctk.CTk):
             ch_fg_color = "#61004f",
             size = 50,
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: asyncio.run(auth_function(auth_action = "register", entry_frames = self.entry, root = self))
+            ch_command = lambda: (asyncio.run(auth_function(auth_action="register", entry_frames=self.entry, root=self)), 
+                      check_validation_email(user_text=self.entry["EMAIL"].get()))
+
         )
         self.CONFIRM_BUTTON.pack(pady = 30)
 
