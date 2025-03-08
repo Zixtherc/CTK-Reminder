@@ -24,6 +24,7 @@ from ..auth_function import auth_function
 
 # Импорты для работы с календарем и его функциями
 from ..calendar.create_calendar import create_calendar
+from ..calendar.clock_face.create_clock import create_clock
 from ..calendar.calendars_func import show_entry
 
 # Необходимый импорт для работы с асинхронностью

@@ -29,7 +29,7 @@ def notify(title: str = "error", message: str = "error", duration: int = 5, dela
     '''
     toast_notify.show_toast(title = title, duration = 5, message = message, threaded = True)
 
-def create_notify(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
+def create_notify(entry_frames: dict = ctk.CTkEntry, index_day: int = 0, timer: int = 10):
     '''
     `Функция`, которая показывает уведомление с помощью `win10toast`
     '''
@@ -37,12 +37,13 @@ def create_notify(entry_frames: dict = ctk.CTkEntry, index_day: int = 0):
     title = entry_frames["TITLE_NOTE"].get()
     text = entry_frames["TEXT_NOTE"].get()
     duration = 5
-    while True:
-        time.sleep(5)
-        print(f'Получилось запустить поток')
+    timer = timer
+    # while True:
+    #     time.sleep(5)
+    #     print(f'Получилось запустить поток')
 
-first_thread = thread.Thread(target=create_notify)
-
+# Поток для автономного отключение, + что бы не "останавливал" программу
+first_thread = thread.Timer(interval = 10, function = create_notify)
     # # Получаем значения из Entry полей
     # title = entry_frames["TITLE_NOTE"].get()
     # text = entry_frames["TEXT_NOTE"].get()

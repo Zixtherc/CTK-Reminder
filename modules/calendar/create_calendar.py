@@ -14,7 +14,7 @@ def create_calendar(entry_frames: dict = {}, parent: object = ctk.CTk):
     `Функция`, которая `создаёт` такое количество `кнопок`, сколько `дней` в `месяце`
     '''
     count_days = get_count_days()
-    all_button = []
+    all_buttons = []
     for day in range(count_days):
         
         button = Button(
@@ -26,7 +26,7 @@ def create_calendar(entry_frames: dict = {}, parent: object = ctk.CTk):
             size = 30,
             ch_corner_radius = 7,
             ch_command = lambda day = day + 1: ((create_notify(entry_frames = entry_frames, index_day = day), 
-            select_button(index_button = day - 1, all_buttons = all_button))))
-        all_button.append(button)  
+            select_button(index_button = day - 1, all_buttons = all_buttons))))
+        all_buttons.append(button)  
         
         button.grid(row = day // 7, column = day % 7, padx = 5, pady = 5)
