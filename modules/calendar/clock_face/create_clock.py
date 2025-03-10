@@ -14,17 +14,17 @@ def create_clock(entry_frames: dict = {}, parent: object = ctk.CTk):
     '''
     all_buttons = []
     circle_cords = circle_position(radius = 75, x_axis = 100, y_axis = 100)
-    for hour in range(0, 12):
+    for hour in range(12):
         
         button = Button(
-            ch_master = parent,
+            ch_master = parent['MAIN_FRAME'],
             icon_name = None,
             text = str(hour + 1),
             ch_fg_color = "#43F2A5",
             ch_hover_color = "#22B85A",
             size = 21,
             ch_corner_radius = 20,
-            ch_command = lambda: select_button(index_button = hour, all_buttons = all_buttons)
+            ch_command = lambda hour = hour: select_button(index_button = hour, all_buttons = all_buttons)
         )
         all_buttons.append(button)
 

@@ -260,7 +260,7 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
         )
-        create_clock(parent = self.frames["MAIN_FRAME"], entry_frames = self.entry)
+        create_calendar(frames_dict = self.frames, entry_frames = self.entry, root = self)
 
         self.SETTINGS_BUTTON = Button(
             ch_master = self.frames["MAIN_FRAME"],
