@@ -15,4 +15,4 @@ def swith_frame(root: object = ctk.CTk, frame_name: str = ctk.CTkFrame):
         # Переименовываем
         frame = root.frames[frame_name]
         # Размещаем ( relwidth  это ширина нашего фрейма, который будет "замещать" основной HEADER, и его будет не видно)
-        frame.place(x=0, y=0, relwidth=1, relheight=1)
+        frame.place(x = 0, y = 0, relwidth = 1, relheight = 1)

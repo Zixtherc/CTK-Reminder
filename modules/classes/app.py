@@ -27,6 +27,9 @@ from ..calendar.create_calendar import create_calendar
 from ..calendar.clock_face.create_clock import create_clock
 from ..calendar.calendars_func import show_entry
 
+# Импорт функции для создания уведомления
+from ..calendar.calendars_func.create_note import create_notify, notify
+
 # Необходимый импорт для работы с асинхронностью
 import asyncio
 
@@ -260,7 +263,7 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
         )
-        create_clock(parent = self.frames["MAIN_FRAME"], entry_frames = self.entry)
+        create_calendar(frames_dict = self.frames, entry_frames = self.entry, root = self)
 
         self.SETTINGS_BUTTON = Button(
             ch_master = self.frames["MAIN_FRAME"],
@@ -328,7 +331,7 @@ class App(ctk.CTk):
             icon_name = " ",
             text = "Save",
             ch_fg_color = "#61004f",
-            ch_command = lambda: None # Пока ничего не добавляем
+            ch_command = lambda: notify(entry_frames = self.entry)
         )
         self.SAVE_NOTE_BUTTON.pack(pady = 20)
 
