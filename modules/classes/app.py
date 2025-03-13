@@ -4,6 +4,9 @@
 # Необходимый импорт 
 import customtkinter as ctk
 
+# Необходимый импорт для работы с асинхронностью
+import asyncio
+
 # Не обязательный импорт *
 from ..jsn_func import read_json
 
@@ -12,6 +15,7 @@ from .entry_frame import Entry_Text
 from .button_frame import Button
 from .frame import Frame
 from .label import Label
+from .slider import Slider
 
 # Импорт функции, для смены фреймов
 from ..window_funcs.switch_frames import swith_frame
@@ -24,14 +28,11 @@ from ..auth_function import auth_function
 
 # Импорты для работы с календарем и его функциями
 from ..calendar.create_calendar import create_calendar
-from ..calendar.clock_face.create_clock import create_clock
-from ..calendar.calendars_func import show_entry
 
 # Импорт функции для создания уведомления
-from ..calendar.calendars_func.create_note import create_notify, notify
+from ..calendar.calendars_func.create_note import notify
 
-# Необходимый импорт для работы с асинхронностью
-import asyncio
+
 
 # Класс приложения
 class App(ctk.CTk):
@@ -304,7 +305,7 @@ class App(ctk.CTk):
 
         self.entry["TITLE_NOTE"] = Entry_Text(
             ch_master = self.frames["CREATE_NOTE_HEADER"],
-            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.7,
+            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.2,
             ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.05,
             ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
@@ -316,8 +317,8 @@ class App(ctk.CTk):
 
         self.entry["TEXT_NOTE"] = Entry_Text(
             ch_master = self.frames["CREATE_NOTE_HEADER"],
-            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.7,
-            ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.5,
+            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.05,
             ch_fg_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_border_width = 0.1,
@@ -325,6 +326,25 @@ class App(ctk.CTk):
             ch_placeholder_text = "Enter your note text"
         )
         self.entry["TEXT_NOTE"].pack(pady = 20)
+
+        self.SLIDER_HOUR = Slider( 
+            ch_master = self.frames["CREATE_NOTE_HEADER"], 
+            ch_width = 500,
+            ch_height = 10, 
+            ch_corner_radius = 10,
+            ch_button_corner_radius = 10, 
+            ch_border_width = 1, 
+            ch_fg_color = "#2d2d2d",
+            ch_border_color = "#ff41a6",
+            ch_button_color = "#ff41a6",
+            ch_from = 0, 
+            ch_to = 100,
+            ch_bg_color = "#2d2d2d", 
+            ch_progress_color = "#ff41a6",
+            ch_button_hover_color = "#ff66b3"
+        )
+        self.SLIDER_HOUR.pack(pady=20)
+
 
         self.SAVE_NOTE_BUTTON = Button(
             ch_master = self.frames["CREATE_NOTE_HEADER"],

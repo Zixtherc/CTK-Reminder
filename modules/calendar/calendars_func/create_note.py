@@ -1,31 +1,37 @@
+# и увидеть приложение, так же помогут не "останавливать" приложение при задержки уведомления
+import threading as thread
+
+import win10toast
+
 import customtkinter as ctk
+ 
+# Импорт для чтения json файлов
+from ...jsn_func.read_json import read_json
 
-# Настройка темы
-ctk.set_appearance_mode("dark")
+# Создаем объект от класса
+toast_notify = win10toast.ToastNotifier()
 
-# Окно
-app = ctk.CTk()
-app.geometry("300x200")
-app.title("CTkSlider Demo")
+import datetime as dttime
+import time
 
-# Функция для обновления текста
-def update_label(value):
-    label.configure(text=f"Value: {int(slider.get())}")
+def notify(entry_frames: dict = ctk.CTkEntry, timer: int = 10):
+    index_day = read_json(filename = "utility.json")
+    # Поток для автономного отключение, + что бы не "останавливал" программу
+    first_thread = thread.Thread(target = create_notify, daemon = True, args = (entry_frames, index_day, timer))
+    first_thread = thread.Thread(target = create_notify, daemon = True, args = (index_day, entry_frames, timer))
+    print(f'поток запущен')
+    first_thread.start()
 
-# Заголовок
-label = ctk.CTkLabel(app, text="Value: 0", font=("Arial", 24))
-label.pack(pady=10)
 
-# Кастомный слайдер с progress_color
-slider = ctk.CTkSlider(
-    app, from_=0, to=100, command=update_label,
-    progress_color="#00ffcc",  # Цвет активной части (неоновый бирюзовый)
-    fg_color="#222222",        # Цвет неактивной части (тёмный фон)
-    button_color="#00cc99",    # Цвет ползунка
-    button_hover_color="#00ffaa",  # Цвет ползунка при наведении
-    height=8
-)
-slider.pack(fill="x", padx=20, pady=10)
+def create_notify(index_day: int, entry_frames: dict = ctk.CTkEntry, timer: int = 10):
+    '''
+    `Функция`, которая показывает уведомление с помощью `win10toast`
+    '''
+    
+    title = entry_frames["TITLE_NOTE"].get()
+    text = entry_frames["TEXT_NOTE"].get()
+    title = str(entry_frames["TITLE_NOTE"].get())
+    text = str(entry_frames["TEXT_NOTE"].get())
 
-# Запуск
-app.mainloop()
+    time.sleep(timer)
+    toast_notify.show_toast(title, text, duration = 10)

@@ -28,22 +28,23 @@ class Slider(ctk.CTkSlider):
 
         Пример использования: 
         ```python
-            slider = Slider(
-            ch_master = self, 
-            ch_width = 100,
-            ch_height = 100, 
-            ch_corner_radius = 2, 
-            ch_button_corner_radius = 0, 
-            ch_bg_color = "#000000', 
-            ch_border_color = "#f3f", 
+            self.SLIDER_HOUR = Slider( 
+            ch_master = self.frames["CREATE_NOTE_HEADER"], 
+            ch_width = 1000,
+            ch_height = 10, 
+            ch_corner_radius = 10,
+            ch_button_corner_radius = 10, 
             ch_border_width = 1, 
-            ch_bg_color = "#000000", 
             ch_fg_color = "#ffffff",
-            ch_border_color = "#808080", 
-            ch_button_color = "#000000", 
-            ch_button_color = "#1e1", 
+            ch_border_color = "#ff41a6",
+            ch_button_color = "#ff41a6",
             ch_from = 0, 
-            ch_to = 100
+            ch_to = 100,
+            ch_bg_color = "#f8f0f5", 
+            ch_progress_color = "#ff41a6",
+            ch_button_hover_color = "#ff66b3"
+            )
+        self.SLIDER_HOUR.pack(pady=20)
         )
         '''
         ctk.CTkSlider.__init__(  
@@ -66,5 +67,5 @@ class Slider(ctk.CTkSlider):
             **kwargs
         )
 
-    def print_slider_progress(self):
-        print(f"Slider progress: {self.get()}")
+    def print_slider_progress(self, value):
+        print(f"Slider progress: {value}")

@@ -10,7 +10,6 @@ from ..window_funcs.switch_frames import swith_frame
 # Импорты для записи в json файлы
 from ..jsn_func.write_json import write_json
 
-
 # Не обязательный импорт
 import customtkinter as ctk
 
