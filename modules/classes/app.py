@@ -327,6 +327,30 @@ class App(ctk.CTk):
         )
         self.entry["TEXT_NOTE"].pack(pady = 20)
 
+        self.label['HOUR'] = Label(
+            ch_master = self.frames["CREATE_NOTE_HEADER"],
+            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.2,
+            ch_fg_color = None,
+            ch_text = ".",
+            ch_text_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 30, weight = "bold")
+        )
+        self.label['HOUR'].pack()
+
+        self.label['MINUTE']= Label(
+            ch_master = self.frames["CREATE_NOTE_HEADER"],
+            ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.2,
+            ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.2,
+            ch_fg_color = None,
+            ch_text = ".",
+            ch_text_color = "#ff41a6",
+            ch_corner_radius = 6,
+            ch_font = ctk.CTkFont(family = "Roboto", size = 30, weight = "bold")
+        )
+        self.label['MINUTE'].pack(padx = 5)
+
         self.SLIDER_HOUR = Slider( 
             ch_master = self.frames["CREATE_NOTE_HEADER"], 
             ch_width = 500,
@@ -338,20 +362,39 @@ class App(ctk.CTk):
             ch_border_color = "#ff41a6",
             ch_button_color = "#ff41a6",
             ch_from = 0, 
-            ch_to = 100,
+            ch_to = 24,
             ch_bg_color = "#2d2d2d", 
             ch_progress_color = "#ff41a6",
-            ch_button_hover_color = "#ff66b3"
+            ch_button_hover_color = "#ff66b3",
+            label = self.label['HOUR']
         )
-        self.SLIDER_HOUR.pack(pady=20)
+        self.SLIDER_HOUR.pack(pady = 20)
 
+        self.SLIDER_TIME = Slider(
+            ch_master = self.frames["CREATE_NOTE_HEADER"], 
+            ch_width = 500,
+            ch_height = 10, 
+            ch_corner_radius = 10,
+            ch_button_corner_radius = 10, 
+            ch_border_width = 1, 
+            ch_fg_color = "#2d2d2d",
+            ch_border_color = "#ff41a6",
+            ch_button_color = "#ff41a6",
+            ch_from = 0, 
+            ch_to = 60,
+            ch_bg_color = "#2d2d2d", 
+            ch_progress_color = "#ff41a6",
+            ch_button_hover_color = "#ff66b3",
+            label = self.label['MINUTE']
+        )
+        self.SLIDER_TIME.pack(pady = 10)
 
         self.SAVE_NOTE_BUTTON = Button(
             ch_master = self.frames["CREATE_NOTE_HEADER"],
             icon_name = " ",
             text = "Save",
             ch_fg_color = "#61004f",
-            ch_command = lambda: notify(entry_frames = self.entry)
+            ch_command = lambda: notify(entry_frames = self.entry, slider_hour = self.SLIDER_HOUR, slider_time = self.SLIDER_TIME)
         )
         self.SAVE_NOTE_BUTTON.pack(pady = 20)
 

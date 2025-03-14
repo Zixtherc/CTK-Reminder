@@ -7,7 +7,7 @@ class Slider(ctk.CTkSlider):
     def __init__(self, ch_master: object, ch_width: int, ch_height: int, ch_corner_radius: int,
                  ch_button_corner_radius: int, ch_border_color: str, ch_border_width: int, ch_bg_color: str, 
                  ch_fg_color: str, ch_progress_color: str, ch_button_hover_color: str, ch_button_color: str,
-                 ch_from: int, ch_to: int, **kwargs):
+                 ch_from: int, ch_to: int, label: object = None, **kwargs):
         '''
         #### Метод `конструктор`, который принимает в себя параметры: ####'
 
@@ -47,6 +47,8 @@ class Slider(ctk.CTkSlider):
         self.SLIDER_HOUR.pack(pady=20)
         )
         '''
+        self.label = label
+
         ctk.CTkSlider.__init__(  
             self,
             master = ch_master,
@@ -63,9 +65,12 @@ class Slider(ctk.CTkSlider):
             button_color = ch_button_color,
             from_ = ch_from,
             to = ch_to,
-            command = self.print_slider_progress, 
+            command = self.update_value_text,
             **kwargs
         )
 
-    def print_slider_progress(self, value):
-        print(f"Slider progress: {value}")
+    def get_value(self):
+        return self.get()
+    
+    def update_value_text(self, value: int):
+        self.label.configure(text = int(value))
