@@ -264,7 +264,7 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
         )
-        create_calendar(frames_dict = self.frames, entry_frames = self.entry, root = self)
+        create_calendar(frames_dict = self.frames, root = self)
 
         self.SETTINGS_BUTTON = Button(
             ch_master = self.frames["MAIN_FRAME"],
@@ -332,7 +332,7 @@ class App(ctk.CTk):
             ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.2,
             ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.2,
             ch_fg_color = None,
-            ch_text = ".",
+            ch_text = "",
             ch_text_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_font = ctk.CTkFont(family = "Roboto", size = 30, weight = "bold")
@@ -344,7 +344,7 @@ class App(ctk.CTk):
             ch_width = self.frames["CREATE_NOTE_HEADER"]._current_width * 0.2,
             ch_height = self.frames["CREATE_NOTE_HEADER"]._current_height * 0.2,
             ch_fg_color = None,
-            ch_text = ".",
+            ch_text = "",
             ch_text_color = "#ff41a6",
             ch_corner_radius = 6,
             ch_font = ctk.CTkFont(family = "Roboto", size = 30, weight = "bold")
@@ -362,7 +362,7 @@ class App(ctk.CTk):
             ch_border_color = "#ff41a6",
             ch_button_color = "#ff41a6",
             ch_from = 0, 
-            ch_to = 24,
+            ch_to = 23,
             ch_bg_color = "#2d2d2d", 
             ch_progress_color = "#ff41a6",
             ch_button_hover_color = "#ff66b3",
@@ -381,7 +381,7 @@ class App(ctk.CTk):
             ch_border_color = "#ff41a6",
             ch_button_color = "#ff41a6",
             ch_from = 0, 
-            ch_to = 60,
+            ch_to = 59,
             ch_bg_color = "#2d2d2d", 
             ch_progress_color = "#ff41a6",
             ch_button_hover_color = "#ff66b3",

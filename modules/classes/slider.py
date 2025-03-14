@@ -47,6 +47,7 @@ class Slider(ctk.CTkSlider):
         self.SLIDER_HOUR.pack(pady=20)
         )
         '''
+        # Cоздаём атрибут класса
         self.label = label
 
         ctk.CTkSlider.__init__(  
@@ -70,7 +71,13 @@ class Slider(ctk.CTkSlider):
         )
 
     def get_value(self):
+        '''
+        `Метод`, который возвращает текущее значение слайдера
+        '''
         return self.get()
     
     def update_value_text(self, value: int):
+        '''
+        `Метод`, который вызывается при изменении значения слайдера, меняет текст label 
+        '''
         self.label.configure(text = int(value))

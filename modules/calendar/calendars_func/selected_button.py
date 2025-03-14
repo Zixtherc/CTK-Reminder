@@ -10,10 +10,7 @@ def select_button(index_button: int, color_select: str = "#000000", all_buttons:
         # Если есть, то меняем цвет кнопки, на которую был нажат ранее
         all_buttons[selected_button[0]].configure(fg_color = reset_color)
 
-    print(f'Это индекс кнопки: {index_button}')    
-    print(f'Это выбранная кнопка: {selected_button[0]}')
     # Из всех кнопок, берем необходимый нам индекс, и меняем на указанный параметр
-    print(f'Это индекс всех кнопк: {all_buttons[index_button]}')
     all_buttons[index_button].configure(fg_color = color_select)
 
     # Запоминаем индекс текущей нажатой кнопки
