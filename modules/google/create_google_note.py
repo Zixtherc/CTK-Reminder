@@ -2,8 +2,8 @@
 from googleapiclient.errors import HttpError
 
 # Создаём функцию записи событий
-def write_event(service, 
-
+def write_event(
+                service, 
                 event_text: str = "Hello World",  # Название события по умолчанию
                 place: str = "Kyiv",  # Местоположение по умолчанию
                 description: str = "No description",  # Описание события по умолчанию

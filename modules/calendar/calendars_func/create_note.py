@@ -10,6 +10,9 @@ import customtkinter as ctk
 # Импорт для чтения json файлов
 from ...jsn_func.read_json import read_json
 
+# Импорт функции записии в Google Calendar
+from ...google.create_google_note import write_event
+
 # Создаем объект от класса уведомлений
 toast_notify = win10toast.ToastNotifier()
 
@@ -72,11 +75,11 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
     
     # Рассчитываем разницу во времени, и переводим все в total second, с начала юникс эпохи
     time_difference = (notify_time - now).total_seconds()
-
-    print(f'Это разница во времени: {time_difference}')
+    
+    # write_event(service = )
 
     # Ждём указанное время
-    # time.sleep(time_difference)
+    time.sleep(time_difference)
     if text and title:
         # Показываем уведомление
         toast_notify.show_toast(title = title, msg = text, duration = 10)

@@ -103,9 +103,9 @@ def authorization():
                 for holiday in holidays:
                     start = holiday["start"].get("dateTime", holiday["start"].get("date"))
                     print(f"{start} - {holiday['summary']}")
-        write_event(event = event)
+        write_event(service = service)
     # Отлавливаем ошибки, и выводим их в терминал
     except HttpError as error:
         print(f"Произошла ошибка : {error}")
         
-# service = authorization()   
+service = authorization()   

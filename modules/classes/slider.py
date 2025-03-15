@@ -80,4 +80,5 @@ class Slider(ctk.CTkSlider):
         '''
         `Метод`, который вызывается при изменении значения слайдера, меняет текст label 
         '''
-        self.label.configure(text = int(value))
+        if self.label:
+            self.label.configure(text = int(value))
