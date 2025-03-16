@@ -108,4 +108,4 @@ def authorization():
     except HttpError as error:
         print(f"Произошла ошибка : {error}")
         
-service = authorization()   
+# service = authorization()   

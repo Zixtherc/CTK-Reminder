@@ -10,8 +10,9 @@ import customtkinter as ctk
 # Импорт для чтения json файлов
 from ...jsn_func.read_json import read_json
 
-# Импорт функции записии в Google Calendar
+# Импорт функции записии в Google Calendar, и создания service 
 from ...google.create_google_note import write_event
+from ...google.servcie_func import create_service
 
 # Создаем объект от класса уведомлений
 toast_notify = win10toast.ToastNotifier()
@@ -76,7 +77,33 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
     # Рассчитываем разницу во времени, и переводим все в total second, с начала юникс эпохи
     time_difference = (notify_time - now).total_seconds()
     
-    # write_event(service = )
+    # Для безопастности приложения
+    try:
+        # Создаем сервис для работы с Google Calendar
+        service = create_service()
+        # Записываем в Google Calendar событие с уведомлением
+        write_event(
+            service = service,
+            event_text = title,
+            place = "None",
+            description = text,
+            start_time = None, # Пока ничего
+            end_time = None, # Пока ничего
+            timezone = "UTC", # Пока UTC, потом можно поменять на часовой пояс пользователя
+            freq = "DAILY",
+            interval = 1, # Пока ничего
+            count = 1, # пока ничего
+            email = "", # Пока ничего, вскоре поменяю
+            default_reminder = True,
+            window_override = "popup",
+            for_how = 10 # Время перед событием для напоминания (в минутах)
+        )
+
+    # Перехватываем исключения и показываем ошибки
+    except Exception as error:
+        toast_notify.show_toast(title = "Error", msg = error, duration = 5)
+        print(f'Произошла ошибка при создании события: {error}')
+
 
     # Ждём указанное время
     time.sleep(time_difference)
