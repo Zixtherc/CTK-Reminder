@@ -81,20 +81,26 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
     try:
         # Создаем сервис для работы с Google Calendar
         service = create_service()
+
+        # Формируем время начала и конца события в формате "Год-Месяц-ДеньTHчас:Минута:Секунда"
+        start_time = f'{now.year}-{now.month:02d}-{now.day:02d}T{now.hour:02d}:{00:02d}:{00:02d}'
+        end_time = f'{now.year}-{now.month:02d}-{index_day:02d}T{slider_hour:02d}:{00:02d}:{00:02d}'
+
+
+
         # Записываем в Google Calendar событие с уведомлением
         write_event(
             service = service,
             event_text = title,
             place = "None",
             description = text,
-            start_time = None, # Пока ничего
-            end_time = None, # Пока ничего
+            start_time = start_time,
+            end_time = end_time, 
             timezone = "UTC", # Пока UTC, потом можно поменять на часовой пояс пользователя
             freq = "DAILY",
-            interval = 1, # Пока ничего
-            count = 1, # пока ничего
-            email = "", # Пока ничего, вскоре поменяю
-            default_reminder = True,
+            interval = 5,
+            count = 3, 
+            email = None, # Пока думаю как реализовать  
             window_override = "popup",
             for_how = 10 # Время перед событием для напоминания (в минутах)
         )
