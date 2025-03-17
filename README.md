@@ -46,14 +46,13 @@ IN PROGRESS IN PROGRESS IN PROGRESS IN PROGRESS
 Здесь будут важные моменты кода
 
 ## Запуск
-
 #### FOR WINDOWS 11 - 10:
 
-- First we need to install Python, if you don't have it yet, watch this video if u have windows 11: https://www.youtube.com/watch?v=C3bOxcILGu4&pp=ygUVaG90IHRvIGluc3RhbGwgcHl0aG9u
+- First we need to install Python, if you don't have it yet, watch this video if u have windows 11: [here](https://www.youtube.com/watch?v=C3bOxcILGu4&pp=ygUVaG90IHRvIGluc3RhbGwgcHl0aG9u)
 
-- or windows 10: https://www.youtube.com/watch?v=IPOr0ran2Oo&pp=ygUVaG90IHRvIGluc3RhbGwgcHl0aG9u
+- or windows 10: [here](https://www.youtube.com/watch?v=IPOr0ran2Oo&pp=ygUVaG90IHRvIGluc3RhbGwgcHl0aG9u)
 
-- And Visual Studio code, here is the official site: https://code.visualstudio.com
+- And Visual Studio code, here is the official site: [here](https://code.visualstudio.com)
 
 - Once we have Python and VSC (Visual Studio Code) installed, we need to clone, like this
 
@@ -64,14 +63,33 @@ IN PROGRESS IN PROGRESS IN PROGRESS IN PROGRESS
 
 after we saw the green VENV in the left corner we can write this
 
-        > pip instal -r requirements
+        > pip install -r requirements.txt
 
 And to run program
 
         > python main.py
 
 #### MacOs - Linux
-In progress
+- First we need to install Python, if you don't have it yet, watch this [video](https://www.youtube.com/watch?v=nhv82tvFfkM&pp=ygUcaG93IHRvIGluc3RhbGwgcHl0aG9uIG9uIG1hYw%3D%3D)
+
+- And Visual Studio code, here is the official site: [here](https://code.visualstudio.com)
+
+- Once we have Python and VSC (Visual Studio Code) installed, we need to clone, like this
+
+        > git clone https://github.com/Zixtherc/CTK-Reminder.git
+        > cd CTK-Reminder
+        > python3 -m venv venv
+        > Source venv/bin/activate
+
+- after we saw the green VENV in the left corner we can write this
+
+        > pip3 install -r requirements.txt
+
+And to run program
+
+        > python main.py
+
+#### If you have any problems, you can contact me on Telegram. You can find my Telegram below
 
 #### Контакты связи
 - email - duckandfiretto@gmail.com

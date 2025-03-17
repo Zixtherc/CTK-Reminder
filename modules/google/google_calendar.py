@@ -8,8 +8,6 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from .create_google_note import write_event
-
 
 # Если мы поменяли read.only, то удаляем token.json, если он создан
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
@@ -62,48 +60,38 @@ def authorization():
         # Получаем список событий из календаря. ??? Как это работает 
         events = events_result.get("items",[])
 
-        # Если нет событий, выводим сообщение и завершаем функцию
-        if not events:
-            print(events)
-            print("Нет ближайших событий.")
-            # Завершаем функцию
-            # return
-            
-        
-        else:
-            print(events)
-            print("Вот ближайшие события : ")
+        print(f'Это события какие-то: {events}')
 
             # Перебираем из событий, и выводим его в терминал
-            for event in events:
-              
-              start = event["start"].get("dateTime", event["start"].get("date"))
-              print(f"{start} - {event['summary']}")
-
-            # Ссылка где находятся все украинские праздники
-            holiday_calendar_id = "en.ukrainian.official#holiday@group.v.calendar.google.com"
-
-            holiday_calendar_id = service.events().list(
-                calendarId = holiday_calendar_id,
-                timeMin = now,
-                maxResults = 5,
-                singleEvents = True,
-                orderBy = "startTime").execute()
+        for event in events:
             
-            holidays = holiday_calendar_id.get("items",[])
+            start = event["start"].get("dateTime", event["start"].get("date"))
+            print(f"{start} - {event['summary']}")
 
-            if not holidays:
-                print("Нет ближайших праздничных дней.")
-                return
-            
-            else:
-                print("\nБлижайшие праздники")
+        # Ссылка где находятся все украинские праздники
+        holiday_calendar_id = "en.ukrainian.official#holiday@group.v.calendar.google.com"
 
-                # Перебираем из праздников, и выводим их 
-                for holiday in holidays:
-                    start = holiday["start"].get("dateTime", holiday["start"].get("date"))
-                    print(f"{start} - {holiday['summary']}")
-        write_event(service = service)
+        holiday_calendar_id = service.events().list(
+            calendarId = holiday_calendar_id,
+            timeMin = now,
+            maxResults = 5,
+            singleEvents = True,
+            orderBy = "startTime").execute()
+        
+        holidays = holiday_calendar_id.get("items",[])
+        print(f'Это праздники: {holidays}')
+
+        if not holidays:
+            print("Нет ближайших праздничных дней.")
+            return
+        
+        else:
+            print("\nБлижайшие праздники")
+
+        # Перебираем из праздников, и выводим их 
+        for holiday in holidays:
+            start = holiday["start"].get("dateTime", holiday["start"].get("date"))
+            print(f"{start} - {holiday['summary']}")
     # Отлавливаем ошибки, и выводим их в терминал
     except HttpError as error:
         print(f"Произошла ошибка : {error}")

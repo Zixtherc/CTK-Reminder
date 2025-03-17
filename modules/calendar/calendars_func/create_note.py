@@ -100,7 +100,7 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
             freq = "DAILY",
             interval = 5,
             count = 3, 
-            email = None, # Пока думаю как реализовать  
+            email = 'duckandfiretto@gmail.com', # Пока думаю как реализовать  
             window_override = "popup",
             for_how = 10 # Время перед событием для напоминания (в минутах)
         )
