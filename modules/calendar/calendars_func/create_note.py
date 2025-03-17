@@ -12,7 +12,7 @@ from ...jsn_func.read_json import read_json
 
 # Импорт функции записии в Google Calendar, и создания service 
 from ...google.create_google_note import write_event
-from ...google.servcie_func import create_service
+from ...google.service_func import create_service
 
 # Создаем объект от класса уведомлений
 toast_notify = win10toast.ToastNotifier()

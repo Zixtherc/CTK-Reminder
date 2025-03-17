@@ -17,4 +17,3 @@ def check_validation_email(user_text: str):
         if char in user_text:
             return False
     return True
-
