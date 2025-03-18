@@ -16,6 +16,7 @@ from .button_frame import Button
 from .frame import Frame
 from .label import Label
 from .slider import Slider
+from .scroll_frame import ScrollFrame
 
 # Импорт функции, для смены фреймов
 from ..window_funcs.switch_frames import swith_frame
@@ -264,7 +265,25 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
         )
+        self.frames['MAIN_FRAME'].update()  # Обновление размеров перед расчётом
+
         create_calendar(frames_dict = self.frames, root = self)
+
+        self.frames['SCROLL_NOTIFICATIONS'] = ScrollFrame(
+            ch_master = self.frames['MAIN_FRAME'],
+            ch_width = self.frames["MAIN_FRAME"]._current_width * 0.7 ,
+            ch_height = self.frames["MAIN_FRAME"]._current_height * 0.15,
+            ch_corner_radius = 2,
+            ch_border_width = 0,
+            ch_border_color = "#d1d1d1",
+            ch_fg_color = "#404040",
+            ch_scrollbar_fg_color = "#61004f",
+            ch_scrollbar_button_color = "#61004f",
+            ch_scrollbar_button_hover_color  = "#61004f",
+            ch_orientation = 'vertical'
+            )
+        self.frames['SCROLL_NOTIFICATIONS'].grid(row = 9, column = 0)
+
 
         self.SETTINGS_BUTTON = Button(
             ch_master = self.frames["MAIN_FRAME"],
