@@ -1,6 +1,3 @@
-# Не обязательный импорт
-import customtkinter as ctk
-
 # Обязательный импорт для вычесления размещения
 import math
 

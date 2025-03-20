@@ -1,6 +1,6 @@
 import customtkinter as ctk
 import time
-from ..data_base.requests_bd import db
+from ..data_base.requests_db import db
 
 class Entry_Text(ctk.CTkEntry):
     '''

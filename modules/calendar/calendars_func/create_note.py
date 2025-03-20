@@ -104,22 +104,22 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
             window_override = "popup",
             for_how = 10 # Время перед событием для напоминания (в минутах)
         )
+        print(time_difference)
+        # Ждём указанное время
+        time.sleep(time_difference)
+        
+        if text and title:
+            # Показываем уведомление
+            toast_notify.show_toast(title = title, msg = text, duration = 10)
+            # Выходим
+            return 
+        else:
+            # Показываем ошибку
+            toast_notify.show_toast(title = "Error", msg = "Error", duration = 5)
+            # Выходим
+            return 
 
     # Перехватываем исключения и показываем ошибки
     except Exception as error:
         toast_notify.show_toast(title = "Error", msg = error, duration = 5)
         print(f'Произошла ошибка при создании события: {error}')
-
-
-    # Ждём указанное время
-    time.sleep(time_difference)
-    if text and title:
-        # Показываем уведомление
-        toast_notify.show_toast(title = title, msg = text, duration = 10)
-        # Выходим
-        return 
-    else:
-        # Показываем ошибку
-        toast_notify.show_toast(title = "Error", msg = "Error", duration = 5)
-        # Выходим
-        return 

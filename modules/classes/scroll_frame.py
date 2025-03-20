@@ -1,9 +1,13 @@
 import customtkinter as ctk
 
 class ScrollFrame(ctk.CTkScrollableFrame):
+    '''
+    ### Класс, который позволяет создать прокручиваемый рядка с использованием customtkinter ###
+    '''
     def __init__(self, ch_master: object, ch_width: int, ch_height: int, ch_corner_radius: int, 
                  ch_border_width: int, ch_border_color: str, ch_fg_color: str, ch_scrollbar_fg_color: str, 
                  ch_scrollbar_button_color: str, ch_scrollbar_button_hover_color: str, ch_orientation: str, **kwargs):
+        
         ctk.CTkScrollableFrame.__init__(
             self,
             master = ch_master,

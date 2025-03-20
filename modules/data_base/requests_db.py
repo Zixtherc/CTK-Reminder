@@ -43,6 +43,7 @@ class DataBase:
                 return True
         except Exception as error:
             print(f'Ошибка при регистрации пользователя: {error}')
+            return False
     
     async def find_user(self,  name : str, password : str) -> bool:
         '''
