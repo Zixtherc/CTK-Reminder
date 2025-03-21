@@ -4,6 +4,9 @@ import threading as thread
 # Импорт модуля для показа уведомлений
 import win10toast
 
+# Импорт объекта от класса NoteDataBase, для управления методами
+from ...data_base.requests_note_db import db_note
+
 # Не обязательный импорт
 import customtkinter as ctk
  
@@ -105,6 +108,9 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
             for_how = 10 # Время перед событием для напоминания (в минутах)
         )
         print(time_difference)
+
+        db_note.add_note(note_title = title, note_text = text, note_time_send = time_difference, email = None) # В параметр email пока ничего не передаём
+
         # Ждём указанное время
         time.sleep(time_difference)
         

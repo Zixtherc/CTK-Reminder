@@ -62,6 +62,6 @@ class DataBase:
 
 # Создаём объект от класса DataBase
 db = DataBase(path_db = "instance/database.db")
-# Вызываем метод создания базы данных
 
+# Вызываем метод создания базы данных
 asyncio.run(db.create_table())
