@@ -17,6 +17,8 @@ from ...jsn_func.read_json import read_json
 from ...google.create_google_note import write_event
 from ...google.service_func import create_service
 
+import asyncio
+
 # Создаем объект от класса уведомлений
 toast_notify = win10toast.ToastNotifier()
 
@@ -25,7 +27,7 @@ import datetime
 # Этот модуль так же нам позволяет приостановить программу
 import time
 
-def notify(entry_frames: dict = ctk.CTkEntry, slider_hour: object = ctk.CTkSlider, slider_time: object = ctk.CTkSlider):
+async def notify(entry_frames: dict = ctk.CTkEntry, slider_hour: object = ctk.CTkSlider, slider_time: object = ctk.CTkSlider):
     '''
     #### `Функция`, `запускает` поток `функции` показа уведомлений  ####
     Параметры: 
@@ -49,12 +51,16 @@ def notify(entry_frames: dict = ctk.CTkEntry, slider_hour: object = ctk.CTkSlide
     # Поток для автономного отключение, + что бы не "останавливал" программу, 
     # параметр daemon помогает нам АВТОМАТИЧЕСКИ завершить поток т.к мы его не может останавливать, поток так же работает в фоновом режиме 
     # В args передаем параметры нашей функции показа уведомлений. ВАЖНО расставлять их в том порядке, в котором они в функции 
-    first_thread = thread.Thread(target = create_notify, daemon = True, args = (index_day, slider_hour, slider_time, title, text))
+
+    def thread_notfy():
+        asyncio.run(create_notify(index_day, slider_hour, slider_time, title, text))
+
+    first_thread = thread.Thread(target = thread_notfy, daemon = True)
     # Запускаем поток
     first_thread.start()
 
 
-def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str, text: str):
+async def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str, text: str):
     '''
     #### `Функция`, которая показывает уведомление с помощью `win10toast` ####
     Параметры: 
@@ -92,24 +98,24 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
 
 
         # Записываем в Google Calendar событие с уведомлением
-        write_event(
-            service = service,
-            event_text = title,
-            place = "None",
-            description = text,
-            start_time = start_time,
-            end_time = end_time, 
-            timezone = "UTC", # Пока UTC, потом можно поменять на часовой пояс пользователя
-            freq = "DAILY",
-            interval = 5,
-            count = 3, 
-            email = 'duckandfiretto@gmail.com', # Пока думаю как реализовать  
-            window_override = "popup",
-            for_how = 10 # Время перед событием для напоминания (в минутах)
-        )
+        # write_event(
+        #     service = service,
+        #     event_text = title,
+        #     place = "None",
+        #     description = text,
+        #     start_time = start_time,
+        #     end_time = end_time, 
+        #     timezone = "UTC", # Пока UTC, потом можно поменять на часовой пояс пользователя
+        #     freq = "DAILY",
+        #     interval = 5,
+        #     count = 3, 
+        #     email = 'duckandfiretto@gmail.com', # Пока думаю как реализовать  
+        #     window_override = "popup",
+        #     for_how = 10 # Время перед событием для напоминания (в минутах)
+        # )
         print(time_difference)
-
-        db_note.add_note(note_title = title, note_text = text, note_time_send = time_difference, email = None) # В параметр email пока ничего не передаём
+        # Добавляем запись в базу данных, когда событие создано
+        await db_note.add_note(note_title = title, note_text = text, note_time_send = notify_time)
 
         # Ждём указанное время
         time.sleep(time_difference)
@@ -117,11 +123,15 @@ def create_notify(index_day: int, slider_hour: int, slider_time: int, title: str
         if text and title:
             # Показываем уведомление
             toast_notify.show_toast(title = title, msg = text, duration = 10)
+            # Удаляем запись из базы данных, когда уведомление показано
+            await db_note.delete_note(note_title = title, note_text = text, note_time_send = notify_time)
             # Выходим
             return 
         else:
             # Показываем ошибку
             toast_notify.show_toast(title = "Error", msg = "Error", duration = 5)
+            # Удаляем запись из базы данных, когда уведомление показано
+            await db_note.delete_note(note_title = title, note_text = text, note_time_send = notify_time)
             # Выходим
             return 
 

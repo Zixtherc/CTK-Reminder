@@ -413,7 +413,7 @@ class App(ctk.CTk):
             icon_name = " ",
             text = "Save",
             ch_fg_color = "#61004f",
-            ch_command = lambda: notify(entry_frames = self.entry, slider_hour = self.SLIDER_HOUR, slider_time = self.SLIDER_TIME)
+            ch_command = lambda: asyncio.run(notify(entry_frames = self.entry, slider_hour = self.SLIDER_HOUR, slider_time = self.SLIDER_TIME))
         )
         self.SAVE_NOTE_BUTTON.pack(pady = 20)
 
