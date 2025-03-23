@@ -41,7 +41,10 @@ async def auth_function(auth_action: str = None, entry_frames: dict = None, root
             log = {"user_status" : "registered"}
             write_json(filename = "utility.json", obj_dict = log)
             # Если пользователь успешно зарегистрировался, переводим его на главную страницу
-            logged_user(root = root)
+            await logged_user(root = root)
+            # Записываем в JSON файл информацию о никнейме пользователя
+            log = {"nickname" : entry_frames["NAME"].get()}
+            write_json(filename = "user_info.json", obj_dict = log)
 
     # Если пользователь выбрал авторизацию     
     elif auth_action == "login":
@@ -55,4 +58,7 @@ async def auth_function(auth_action: str = None, entry_frames: dict = None, root
             log = {"user_status" : "logged"}
             write_json(filename = "utility.json", obj_dict = log)
             # Если пользователь успешно зарегистрировался, переводим его на главную страницу
-            logged_user(root = root)
+            await logged_user(root = root)
+            # Записываем в JSON файл информацию о никнейме пользователя
+            log = {"nickname" : entry_frames["LOGIN_NAME"].get()}
+            write_json(filename = "user_info.json", obj_dict = log)

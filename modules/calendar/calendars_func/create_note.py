@@ -114,8 +114,11 @@ async def create_notify(index_day: int, slider_hour: int, slider_time: int, titl
         #     for_how = 10 # Время перед событием для напоминания (в минутах)
         # )
         print(time_difference)
+
+        json_data = read_json(filename = "user_info.json")
+
         # Добавляем запись в базу данных, когда событие создано
-        await db_note.add_note(note_title = title, note_text = text, note_time_send = notify_time)
+        await db_note.add_note(note_title = title, note_text = text, note_time_send = notify_time, nickname = json_data['nickname'])
 
         # Ждём указанное время
         time.sleep(time_difference)

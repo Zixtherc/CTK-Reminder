@@ -107,7 +107,7 @@ class App(ctk.CTk):
             ch_fg_color = "#61004f",
             size = 35,
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: swith_frame(root = self, frame_name = 'REGISTER_HEADER')
+            ch_command = lambda: asyncio.run(swith_frame(root = self, frame_name = 'REGISTER_HEADER'))
         )
         self.REGISTER_BUTTON.place(x = 200, y = 250)
 
@@ -118,7 +118,7 @@ class App(ctk.CTk):
             ch_fg_color = "#61004f",
             size = 35,
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: swith_frame(root = self, frame_name = "LOGIN_HEADER")
+            ch_command = lambda: asyncio.run(swith_frame(root = self, frame_name = "LOGIN_HEADER"))
         )
         self.LOGIN_BUTTON.place(x = 500, y = 250)
 
@@ -290,7 +290,7 @@ class App(ctk.CTk):
             icon_name = "dots_setting.png",
             text = "Settings Button",
             ch_fg_color = "#61004f",
-            ch_command = lambda: swith_frame(root = self, frame_name = "SETTINGS_HEADER")
+            ch_command = lambda: asyncio.run(swith_frame(root = self, frame_name = "SETTINGS_HEADER"))
             )
         self.SETTINGS_BUTTON.pack(pady = 10)
 
@@ -309,7 +309,7 @@ class App(ctk.CTk):
             text = " ",
             ch_hover_color = "#1d1d1d",
             ch_fg_color = "transparent",
-            ch_command = lambda: swith_frame(root = self, frame_name = "CREATE_NOTE_HEADER")
+            ch_command = lambda: asyncio.run(swith_frame(root = self, frame_name = "CREATE_NOTE_HEADER"))
         )
         self.ADD_NOTE_BUTTON.pack(pady = 10)
     
@@ -457,7 +457,7 @@ class App(ctk.CTk):
             size = 50,
             ch_hover_color = "#1d1d1d",
             ch_fg_color = "transparent",
-            ch_command = lambda: swith_frame(root = self, frame_name = "HELP_HEADER")
+            ch_command = lambda: asyncio.run(swith_frame(root = self, frame_name = "HELP_HEADER"))
         )
         self.HELP_BUTTON.pack(pady = 10)
 

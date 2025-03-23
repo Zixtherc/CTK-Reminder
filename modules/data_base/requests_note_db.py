@@ -25,40 +25,29 @@ class NoteDataBase:
         async with sql.connect(self.db_path) as db:
             # Создаем таблицу, если она еще не существует, иначе она не будет изменена, если она уже существует, она не будет создана повторно.
             await db.execute('''CREATE TABLE IF NOT EXISTS users_notes ( 
+                nickname TEXT NOT NULL,
                 note_title TEXT NOT NULL,
                 note_text TEXT NOT NULL,
                 note_time_send INTEGER NOT NULL)''')
             # ( Не обязательно ), коммитим измения ( но лучше закоммитить )
             await db.commit()
-    async def add_note(self, note_title: str, note_text: str, note_time_send: int):
+    async def add_note(self, note_title: str, note_text: str, note_time_send: int, nickname: str):
         '''
         `Метод`, который добавляет новую заметку в базу данных
 
         Принимает в себя параметры: 
         - `note_title:` Заголовок заметки;
         - `note_text:` Текст заметки;
-        - `note_time_send:` Время отправки заметки в формате Unix timestamp
+        - `note_time_send:` Время отправки заметки
+        - `nickname:` Никнейм пользователя
         '''
         # Используем блок try except для безопасного выполнения кода 
         try:
-            # Если параметр был задан ( если пользователь использует создания событий через google calendar)
-            # if email:
-            #     # Так же строим коннект
-            #     async with sql.connect(self.db_path) as db:
-            #         # Выполняем запрос
-            #         await db.execute('''INSERT INTO users_notes (note_title, note_text, note_time_send, email) VALUES (?, ?, ?, ?)''',
-            #                         (note_title, note_text, note_time_send, email))
-            #         # ОБЯЗАТЕЛЬНО коммитим изменения
-            #         await db.commit()
-            #         # Возвращаем True если все получилось
-            #         return True
-            # # Если параметр не был задан
-            # else:
-                # Так же строим коннект
+            # Так же строим коннект
             async with sql.connect(self.db_path) as db:
                 # Выполняем запрос
-                await db.execute('''INSERT INTO users_notes (note_title, note_text, note_time_send) VALUES (?, ?, ?)''',
-                                (note_title, note_text, note_time_send))
+                await db.execute('''INSERT INTO users_notes (note_title, note_text, note_time_send, nickname) VALUES (?, ?, ?, ?)''',
+                                (note_title, note_text, note_time_send, nickname))
                 # ОБЯЗАТЕЛЬНО коммитим изменения
                 await db.commit()
                 # Возвращаем True если все получилось
@@ -80,20 +69,6 @@ class NoteDataBase:
         '''
         # Используем блок try except для безопасного выполнения кода 
         try:
-
-            # Если параметр был задан ( если пользователь использует создания событий через google calendar)
-            # if email:
-            #     # Строим коннект
-            #     async with sql.connect(self.db_path) as db:
-            #         # Выполняем запрос
-            #         await db.execute('''UPDATE users_notes SET note_title = ?, note_text = ?, note_time_send = ?, email = ? WHERE email = ?''',
-            #                         (note_title, note_text, note_time_send, email, email))
-            #         # ОБЯЗАТЕЛЬНО КОММИТИМ
-            #         await db.commit()
-            #         # Возвращаем True
-            #         return True
-            # Если параметр не был задан
-            # else:
             # Строим коннект
             async with sql.connect(self.db_path) as db:
                 # Выполняем запрос
@@ -120,19 +95,6 @@ class NoteDataBase:
         '''
         # Используем блок try except для безопасного выполнения кода 
         try:
-            # Если параметр был задан ( если пользователь использует создания событий через google calendar)
-            # if email:
-            #     # Строим коннект
-            #     async with sql.connect(self.db_path) as db:
-            #         # Выполняем запрос
-            #         await db.execute('''DELETE FROM users_notes WHERE note_title = ? AND note_text = ? AND note_time_send = ? AND email = ?''',
-            #                         (note_title, note_text, note_time_send, email))
-            #         # Коммитим
-            #         await db.commit()
-            #         # Возвращаем True
-            #         return True
-            # Если параметр не был задан
-           
             # Строим коннект
             async with sql.connect(self.db_path) as db:
                 # Выполняем запрос
@@ -159,12 +121,6 @@ class NoteDataBase:
         try:
             # Строим коннект
             async with sql.connect(self.db_path) as db:
-                # Если пользователь использует создания событий через google calendar
-                # if email:
-                #     result = await db.execute('''SELECT * FROM users_notes WHERE email = ?''', (email,))
-                #     # Возвращаем всех пользователей у кого email = email ( только одного т.к email уникальный ключ )
-                #     return await result.fetchall()
-                # else:
                 result = await db.execute('''SELECT * FROM users_notes WHERE nickname = ?''', (nickname,))
                 return await result.fetchall()
         # В случае ошибки выводим её

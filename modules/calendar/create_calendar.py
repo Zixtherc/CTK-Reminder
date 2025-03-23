@@ -12,6 +12,9 @@ from ..jsn_func.write_json import write_json
 # Не обязательный импорт
 import customtkinter as ctk
 
+# Импорт для работы с ассинхроностью
+import asyncio
+
 def create_calendar(frames_dict: object = ctk.CTkFrame, root: object = ctk.CTk):
     '''
     #### `Функция`, которая `создаёт` такое количество `кнопок`, сколько `дней` в `месяце` ####
@@ -38,7 +41,7 @@ def create_calendar(frames_dict: object = ctk.CTkFrame, root: object = ctk.CTk):
             size = 30,
             ch_corner_radius = 7,
             ch_command = lambda day = day + 1: ((select_button(index_button = day - 1, all_buttons = all_buttons), # lambda day + 1 т.к нумерация начинается с 0
-            swith_frame(root = root, frame_name = 'CREATE_NOTE_HEADER')), # Меняем фрейм
+            asyncio.run(swith_frame(root = root, frame_name = 'CREATE_NOTE_HEADER'))), # Меняем фрейм
             write_json(filename = "utility.json", obj_dict = day))) # Записываем в json файл
         all_buttons.append(button) # Добавляем кнопку в массив
         # Размещаем кнопку на фрейме
