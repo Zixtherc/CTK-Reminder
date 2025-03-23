@@ -282,7 +282,7 @@ class App(ctk.CTk):
             ch_scrollbar_button_hover_color  = "#61004f",
             ch_orientation = 'vertical'
             )
-        # self.frames['SCROLL_NOTIFICATIONS'].grid(row = 9, column = 0)
+        self.frames['SCROLL_NOTIFICATIONS'].grid(row = 9, column = 0)
 
 
         self.SETTINGS_BUTTON = Button(

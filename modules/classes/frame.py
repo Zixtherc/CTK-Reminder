@@ -37,14 +37,15 @@ class Frame(ctk.CTkFrame):
 
         
 
-    def update_notes(self, count_notes: int):
+    def update_notes(self, count_notes: int, frame_position: str):
         for label in range(count_notes):
+
             self.label_no_notes = Label(
-            ch_master = self, 
-            ch_width = 30,
-            ch_height = 15,
-            ch_fg_color = "#808080",
-            ch_text = f"5",
-            ch_corner_radius = 5
-        )
+                ch_master = frame_position, 
+                ch_width = 30,
+                ch_height = 15,
+                ch_fg_color = "#808080",
+                ch_text = f"5",
+                ch_corner_radius = 5
+            )
             self.label_no_notes.pack()

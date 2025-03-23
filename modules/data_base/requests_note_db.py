@@ -121,8 +121,9 @@ class NoteDataBase:
             # Строим коннект
             async with sql.connect(self.db_path) as db:
                 result = await db.execute('''SELECT * FROM users_notes WHERE nickname = ?''', (nickname,))
-                return await result.fetchall()
-        # В случае ошибки выводим её
+                count =  await result.fetchall()
+                return len(count)
+        # В случае ошибки выводим её    
         except Exception as error:
             print(f'Ошибка при получении заметок из базы: {error}')
             return False
