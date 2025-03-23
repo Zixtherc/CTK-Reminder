@@ -1,3 +1,7 @@
+# Обязательный импорт для отображения количества заметок 
+from .label import Label
+
+# Обязательный импорт
 import customtkinter as ctk 
 
 class Frame(ctk.CTkFrame):
@@ -30,3 +34,17 @@ class Frame(ctk.CTkFrame):
         # Устанавливаем флаг, что размеры НЕ будут автоматически подстраиваться под размеры содержимого
         self.pack_propagate(False)
         self.grid_propagate(False)
+
+        
+
+    def update_notes(self, count_notes: int):
+        for label in range(count_notes):
+            self.label_no_notes = Label(
+            ch_master = self, 
+            ch_width = 30,
+            ch_height = 15,
+            ch_fg_color = "#808080",
+            ch_text = f"5",
+            ch_corner_radius = 5
+        )
+            self.label_no_notes.pack()

@@ -19,8 +19,8 @@ async def swith_frame(root: object = ctk.CTk, frame_name: str = ctk.CTkFrame):
     if frame_name == 'MAIN_FRAME' and frame_name in root.frames:
         data = read_json(filename = 'user_info.json')
         data = await db_note.get_all_notes(nickname = data['nickname'])
-        print(f'Это дата: {data}')
-        print(f'Это получилось')
+        frame = root.frames[frame_name]  # Получаем фрейм
+        frame.update_notes(count_notes = 5)
 
     # Если указанный фрейм существует в словаре
     if frame_name in root.frames:

@@ -15,7 +15,6 @@ class NoteDataBase:
     async def create_note_table(self):
         '''  
         `Метод`, который создает таблицу заметок в базе данных
-
         Пример использования:
         ```python 
         db.create_table()
