@@ -37,15 +37,27 @@ class Frame(ctk.CTkFrame):
 
         
 
-    def update_notes(self, count_notes: int, frame_position: str):
-        for label in range(count_notes):
+    def update_notes(self, count_notes: int, frame_position: str, note_data):
+        '''
+        `Метод` `обновления` заметок
 
+        Принимает в себя параметры:
+        - `count_notes:` Количество заметок;
+        - `frame_position:` Местоположение `фрейма`;
+        - `note_data:` Данные заметок;
+
+        Пример использования:
+        ```python
+        frame.update_notes(count_notes = count_notes, frame_position = frame, note_data = data) 
+        ```
+        '''
+        for index in range(count_notes):
             self.label_no_notes = Label(
                 ch_master = frame_position, 
-                ch_width = 30,
-                ch_height = 15,
+                ch_width = 170,
+                ch_height = 70,
                 ch_fg_color = "#808080",
-                ch_text = f"5",
+                ch_text = f'Title:{note_data[index][1]}\nText:{note_data[index][2]}\nDate:{note_data[index][-1]}\n',
                 ch_corner_radius = 5
             )
             self.label_no_notes.pack()

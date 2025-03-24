@@ -33,10 +33,12 @@ async def swith_frame(root: object = ctk.CTk, frame_name: str = ctk.CTkFrame, sl
         data = read_json(filename = 'user_info.json')
         # Получаем количество всех заметок
         data = await db_note.get_all_notes(nickname = data['nickname'])
+        print(f'Это слайдер (скролл фрейм): {slider_for_notify}')
+        count_notes = len(data)
         # Получаем объект фрейма
         frame = root.frames[frame_name]
-        # Размещяем фрейм и текст
-        frame.update_notes(count_notes = data, frame_position = frame) 
+        # # Размещяем фрейм и текст
+        frame.update_notes(count_notes = count_notes, frame_position = slider_for_notify, note_data = data) 
 
     # Если указанный фрейм существует в словаре
     if frame_name in root.frames:

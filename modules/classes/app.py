@@ -190,7 +190,7 @@ class App(ctk.CTk):
             ch_fg_color = "#61004f",
             size = 50,
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: (asyncio.run(auth_function(auth_action="register", entry_frames=self.entry, root=self)), 
+            ch_command = lambda: (asyncio.run(auth_function(auth_action="register", entry_frames=self.entry, root=self, slider_for_notify = self.frames['SCROLL_NOTIFICATIONS'])), 
                       check_validation_email(user_text=self.entry["EMAIL"].get()))
 
         )
@@ -253,7 +253,7 @@ class App(ctk.CTk):
             text = "Login",
             ch_fg_color = "#61004f",
             # Вызываем функцию через lambda, на сколько я помню, это нужно для того, что бы можно было передать параметры
-            ch_command = lambda: asyncio.run(auth_function(auth_action = "login", entry_frames = self.entry, root = self))
+            ch_command = lambda: asyncio.run(auth_function(auth_action = "login", entry_frames = self.entry, root = self, slider_for_notify = self.frames['SCROLL_NOTIFICATIONS']))
             )
         self.CONFIRM_BUTTON_LOGIN.pack()
 
