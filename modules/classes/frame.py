@@ -60,4 +60,4 @@ class Frame(ctk.CTkFrame):
                 ch_text = f'Title:{note_data[index][1]}\nText:{note_data[index][2]}\nDate:{note_data[index][-1]}\n',
                 ch_corner_radius = 5
             )
-            self.label_no_notes.pack()
+            self.label_no_notes.grid(row = index, column = 0, padx = 5, pady = 5)

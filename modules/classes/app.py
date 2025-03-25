@@ -265,25 +265,26 @@ class App(ctk.CTk):
             ch_height = self.HEIGHT,
             ch_fg_color = "#1d1d1d"
         )
-        self.frames['MAIN_FRAME'].update()  # Обновление размеров перед расчётом
+        self.frames['MAIN_FRAME'].update()
 
-        create_calendar(frames_dict = self.frames, root = self)
+        # create_calendar(frames_dict = self.frames, root = self)
 
         self.frames['SCROLL_NOTIFICATIONS'] = ScrollFrame(
             ch_master = self.frames['MAIN_FRAME'],
-            ch_width = self.frames["MAIN_FRAME"]._current_width * 0.7 ,
-            ch_height = self.frames["MAIN_FRAME"]._current_height * 0.15,
-            ch_corner_radius = 2,
-            ch_border_width = 0,
+            ch_width = self.frames["MAIN_FRAME"]._current_width * 0.7,
+            ch_height = self.frames["MAIN_FRAME"]._current_height * 0.05,
+            ch_corner_radius = 8,
+            ch_border_width = 1,
             ch_border_color = "#d1d1d1",
             ch_fg_color = "#404040",
-            ch_scrollbar_fg_color = "#61004f",
-            ch_scrollbar_button_color = "#61004f",
-            ch_scrollbar_button_hover_color  = "#61004f",
+            ch_scrollbar_fg_color = None,
+            ch_scrollbar_button_color = "#7a0c6f",
+            ch_scrollbar_button_hover_color = "#9a4b9a",
             ch_orientation = 'vertical'
-            )
-        self.frames['SCROLL_NOTIFICATIONS'].grid(row = 9, column = 0)
-
+        )
+        
+        self.frames['SCROLL_NOTIFICATIONS'].update()
+        self.frames['SCROLL_NOTIFICATIONS'].grid(row = 5, column = 1, sticky = 's')
 
         self.SETTINGS_BUTTON = Button(
             ch_master = self.frames["MAIN_FRAME"],
