@@ -267,12 +267,12 @@ class App(ctk.CTk):
         )
         self.frames['MAIN_FRAME'].update()
 
-        # create_calendar(frames_dict = self.frames, root = self)
+        create_calendar(frames_dict = self.frames, root = self)
 
         self.frames['SCROLL_NOTIFICATIONS'] = ScrollFrame(
             ch_master = self.frames['MAIN_FRAME'],
-            ch_width = self.frames["MAIN_FRAME"]._current_width * 0.7,
-            ch_height = self.frames["MAIN_FRAME"]._current_height * 0.05,
+            ch_width = self.frames["MAIN_FRAME"]._current_width - 33,
+            ch_height = self.frames["MAIN_FRAME"]._current_height * 0.35,
             ch_corner_radius = 8,
             ch_border_width = 1,
             ch_border_color = "#d1d1d1",
@@ -283,8 +283,7 @@ class App(ctk.CTk):
             ch_orientation = 'vertical'
         )
         
-        self.frames['SCROLL_NOTIFICATIONS'].update()
-        self.frames['SCROLL_NOTIFICATIONS'].grid(row = 5, column = 1, sticky = 's')
+        # self.frames['SCROLL_NOTIFICATIONS'].grid(row = 5, column = 1, sticky = 'n', pady = self.frames["MAIN_FRAME"]._current_height * 0.5, padx = 5)
 
         self.SETTINGS_BUTTON = Button(
             ch_master = self.frames["MAIN_FRAME"],

@@ -5,6 +5,7 @@ from ..classes.button_frame import Button
 from .calendars_func.calendars import get_count_days
 from .calendars_func.selected_button import select_button
 from ..window_funcs.switch_frames import swith_frame
+from ..window_funcs.animation import animation
 
 # Импорты для записи в json файлы
 from ..jsn_func.write_json import write_json
@@ -40,8 +41,8 @@ def create_calendar(frames_dict: object = ctk.CTkFrame, root: object = ctk.CTk):
             ch_hover_color = "#901873",
             size = 30,
             ch_corner_radius = 7,
-            ch_command = lambda day = day + 1: ((select_button(index_button = day - 1, all_buttons = all_buttons), # lambda day + 1 т.к нумерация начинается с 0
-            asyncio.run(swith_frame(root = root, frame_name = 'CREATE_NOTE_HEADER'))), # Меняем фрейм
+            ch_command = lambda day = day + 1: ((animation(shift_distance = 30, animated_obj = button, canvas = ctk.CTkCanvas )), # lambda day + 1 т.к нумерация начинается с 0
+            # asyncio.run(swith_frame(root = root, frame_name = 'CREATE_NOTE_HEADER'))), # Меняем фрейм
             write_json(filename = "utility.json", obj_dict = day))) # Записываем в json файл
         all_buttons.append(button) # Добавляем кнопку в массив
         # Размещаем кнопку на фрейме
