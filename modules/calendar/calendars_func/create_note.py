@@ -98,21 +98,21 @@ async def create_notify(index_day: int, slider_hour: int, slider_time: int, titl
 
 
         # Записываем в Google Calendar событие с уведомлением
-        # write_event(
-        #     service = service,
-        #     event_text = title,
-        #     place = "None",
-        #     description = text,
-        #     start_time = start_time,
-        #     end_time = end_time, 
-        #     timezone = "UTC", # Пока UTC, потом можно поменять на часовой пояс пользователя
-        #     freq = "DAILY",
-        #     interval = 5,
-        #     count = 3, 
-        #     email = 'duckandfiretto@gmail.com', # Пока думаю как реализовать  
-        #     window_override = "popup",
-        #     for_how = 10 # Время перед событием для напоминания (в минутах)
-        # )
+        write_event(
+            service = service,
+            event_text = title,
+            place = "None",
+            description = text,
+            start_time = start_time,
+            end_time = end_time, 
+            timezone = "UTC", # Пока UTC, потом можно поменять на часовой пояс пользователя
+            freq = "DAILY",
+            interval = 5,
+            count = 3, 
+            email = 'duckandfiretto@gmail.com', # Пока думаю как реализовать  
+            window_override = "popup",
+            for_how = 10 # Время перед событием для напоминания (в минутах)
+        )
         print(time_difference)
 
         json_data = read_json(filename = "user_info.json")

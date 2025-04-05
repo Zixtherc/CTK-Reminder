@@ -41,7 +41,7 @@ def create_calendar(frames_dict: object = ctk.CTkFrame, root: object = ctk.CTk):
             ch_hover_color = "#901873",
             size = 30,
             ch_corner_radius = 7,
-            ch_command = lambda day = day + 1: ((animation(shift_distance = 30, animated_obj = button, canvas = ctk.CTkCanvas )), # lambda day + 1 т.к нумерация начинается с 0
+            ch_command = lambda day = day + 1: ((animation(shift_distance = 30, steps = 10, animated_obj = button)), # lambda day + 1 т.к нумерация начинается с 0
             # asyncio.run(swith_frame(root = root, frame_name = 'CREATE_NOTE_HEADER'))), # Меняем фрейм
             write_json(filename = "utility.json", obj_dict = day))) # Записываем в json файл
         all_buttons.append(button) # Добавляем кнопку в массив

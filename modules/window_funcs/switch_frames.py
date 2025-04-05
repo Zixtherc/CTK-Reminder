@@ -24,7 +24,6 @@ async def swith_frame(root: object = ctk.CTk, frame_name: str = ctk.CTkFrame, sl
     for frame in root.frames.values():
         # Скрываем каждый 
         frame.pack_forget()
-
         frame.place_forget()
 
     # Условие для размещения уведомлений
@@ -33,7 +32,6 @@ async def swith_frame(root: object = ctk.CTk, frame_name: str = ctk.CTkFrame, sl
         data = read_json(filename = 'user_info.json')
         # Получаем количество всех заметок
         data = await db_note.get_all_notes(nickname = data['nickname'])
-        print(f'Это слайдер (скролл фрейм): {slider_for_notify}')
         count_notes = len(data)
         # Получаем объект фрейма
         frame = root.frames[frame_name]
